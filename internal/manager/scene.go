@@ -155,7 +155,10 @@ func GetSceneStreamPaths(scene *models.Scene, directStreamURL *url.URL, maxStrea
 	// don't care if we can't get the container
 	container, _ := GetVideoFileContainer(pf)
 
-	if HasTranscode(scene, config.GetInstance().GetVideoFileNamingAlgorithm()) || ffmpeg.IsValidAudioForContainer(audioCodec, container) {
+	// a DVD title's file is only its first part, so it is never streamed
+	// directly; a generated transcode covers the whole title
+	isDVD := len(ffmpeg.DVDTitleParts(pf.Path)) > 1
+	if HasTranscode(scene, config.GetInstance().GetVideoFileNamingAlgorithm()) || (!isDVD && ffmpeg.IsValidAudioForContainer(audioCodec, container)) {
 		endpoints = append(endpoints, makeStreamEndpoint(directEndpointType, ""))
 	}
 

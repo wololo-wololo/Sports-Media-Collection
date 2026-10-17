@@ -48,8 +48,9 @@ func (a Args) Duration(seconds float64) Args {
 }
 
 // Input adds the input (-i) and returns the result.
+// Multi-part DVD titles are read as one input (see InputPath).
 func (a Args) Input(i string) Args {
-	return append(a, "-i", i)
+	return append(a, "-i", InputPath(i))
 }
 
 // Output adds the output o and returns the result.

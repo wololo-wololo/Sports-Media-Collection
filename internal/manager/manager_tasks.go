@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"github.com/stashapp/stash/internal/manager/config"
+	"github.com/stashapp/stash/pkg/ffmpeg"
 	"github.com/stashapp/stash/pkg/file"
 	file_image "github.com/stashapp/stash/pkg/file/image"
 	"github.com/stashapp/stash/pkg/file/video"
@@ -41,6 +42,12 @@ func isZip(pathname string) bool {
 }
 
 func isVideo(pathname string) bool {
+	// in a ripped DVD only the first part of each title set is a video; the
+	// other parts are read through it, and menus are skipped, whatever the
+	// configured extensions say
+	if ffmpeg.IsDVDVob(pathname) {
+		return ffmpeg.IsDVDTitle(pathname)
+	}
 	vidExt := config.GetInstance().GetVideoExtensions()
 	return fsutil.MatchExtension(pathname, vidExt)
 }

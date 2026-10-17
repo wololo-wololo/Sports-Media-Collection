@@ -49,6 +49,14 @@ func (s *SceneServer) StreamSceneDirect(scene *models.Scene, w http.ResponseWrit
 	sceneHash := scene.GetHash(config.GetInstance().GetVideoFileNamingAlgorithm())
 
 	fp := GetInstance().Paths.Scene.GetStreamPath(scene.Path, sceneHash)
+
+	// the file of a multi-part DVD title is only its first part; it can only
+	// be played through a transcoded stream
+	if fp == scene.Path && len(ffmpeg.DVDTitleParts(fp)) > 1 {
+		http.Error(w, "DVD titles are played through a transcoded stream", http.StatusUnsupportedMediaType)
+		return
+	}
+
 	streamRequestCtx := ffmpeg.NewStreamRequestContext(w, r)
 
 	// #2579 - hijacking and closing the connection here causes video playback to fail in Safari

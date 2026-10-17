@@ -228,7 +228,8 @@ func (f *FFProbe) NewVideoFile(videoPath string) (*VideoFile, error) {
 		args = append(args, "-show_entries", "stream_side_data=rotation")
 	}
 
-	args = append(args, videoPath)
+	// multi-part DVD titles are probed as one stream, for the full duration
+	args = append(args, InputPath(videoPath))
 
 	cmd := stashExec.Command(f.path, args...)
 	out, err := cmd.Output()

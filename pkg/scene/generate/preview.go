@@ -198,7 +198,10 @@ func (g Generator) previewVideoChunk(lockCtx *fsutil.LockContext, fn string, opt
 		StartTime:  options.StartTime,
 		Duration:   options.Duration,
 
-		XError:   !fallback,
+		// seeking into DVD video can split an audio frame, which ffmpeg
+		// reports as a decoder error; it is harmless, and failing on it would
+		// force the slow fallback that decodes long titles from the start
+		XError:   !fallback && !ffmpeg.IsDVDVob(fn),
 		SlowSeek: fallback,
 
 		VideoCodec: ffmpeg.VideoCodecLibX264,
