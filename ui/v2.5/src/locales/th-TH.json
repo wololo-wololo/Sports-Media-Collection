@@ -824,9 +824,9 @@
             "where_can_stash_store_blobs_description": "Stash สามารถบันทึกข้อมูลไบนารี เช่น หน้าปกซีน นักแสดง สตูดิโอ และภาพประกอบแท็ก ในฐานข้อมูลหรือในไฟล์ระบบก็ได้ หากไม่ได้ระบุเป็นอย่างอื่น Stash จะจัดเก็บในไฟล์ระบบที่ไดเร็กทอรีย่อย <code>blobs</code> ซึ่งอยู่ในไดเร็กทอรีเดียวกันกับไฟล์การตั้งค่า หากต้องการระบุค่าเองให้ระบุตำแหน่งไดเร็กทอรีในรูปแบบ absolute หรือ relative หากไม่มีไดเร็กทอรีนี้อยู่ Stash จะสร้างใหม่ให้",
             "where_can_stash_store_its_generated_content": "ต้องการให้ Stash เก็บเนื้อหาที่ถูกสร้างขึ้นที่ไหน?",
             "where_can_stash_store_its_generated_content_description": "Stash จะสร้างไฟล์รูปภาพและวิดีโอขึ้นเพื่อใช้เป็นไฟล์ตัวอย่างสำหรับเนื้อหา รวมถึงการแปลงไฟล์จากรูปแบบที่ไม่รองรับด้วย หากไม่ได้ระบุเป็นอย่างอื่น Stash จะสร้างไดเร็กทอรี <code>generated</code> ขึ้นในไดเร็กทอรีเดียวกับไฟล์การตั้งค่า หากต้องการระบุค่าเองให้ระบุตำแหน่งไดเร็กทอรีในรูปแบบ absolute หรือ relative หากไม่มีไดเร็กทอรีนี้อยู่ Stash จะสร้างใหม่ให้",
-            "where_is_your_porn_located": "ไฟล์หนังชมพูของคุณอยู่ที่ไหน?",
+            "where_is_your_content_located": "ไฟล์หนังชมพูของคุณอยู่ที่ไหน?",
             "where_can_stash_store_its_database_warning": "คำเตือน: Stash <strong>ไม่รองรับ</strong>การจัดเก็บฐานข้อมูลในที่อื่นๆ ที่ไม่ใช่เซิร์ฟเวอร์ Stash! (เช่นจัดเก็บฐานข้อมูลบน NAS แต่เซิร์ฟเวอร์อยู่ที่คอมพิวเตอร์เครื่องอื่น) ระบบฐานข้อมูล SQLite ไม่ได้ถูกออกแบบมาสำหรับการทำงานบนเน็ตเวิร์คและอาจทำให้ฐานข้อมูลพังได้",
-            "where_is_your_porn_located_description": "เพิ่มไดเร็กทอรีที่มีไฟล์หนังชมพูและรูปภาพชมพูของคุณ Stash จะสแกนและเพิ่มไฟล์เหล่านั้นเข้าสู่ฐานข้อมูล"
+            "where_is_your_content_located_description": "เพิ่มไดเร็กทอรีที่มีไฟล์หนังชมพูและรูปภาพชมพูของคุณ Stash จะสแกนและเพิ่มไฟล์เหล่านั้นเข้าสู่ฐานข้อมูล"
         },
         "confirm": {
             "stash_library_directories": "ไดเร็กทอรีสำหรับไลบรารี Stash",
@@ -960,7 +960,6 @@
     "country": "ประเทศ",
     "dialogs": {
         "clear_play_history_confirm": "คุณแน่ใจว่าต้องการล้างประวัติการเล่นใช่หรือไม่?",
-        "clear_o_history_confirm": "คุณแน่ใจว่าต้องการล้างประวัติ O ใช่หรือไม่?",
         "edit_entity_title": "แก้ไข{count, plural, one {{singularEntity}} other {{pluralEntity}}}",
         "lightbox": {
             "delay": "การหน่วงเวลา (วินาที)",
@@ -1142,7 +1141,6 @@
         "audio_codec": "โคเด็คเสียง",
         "phash": "PHash",
         "play_count": "จำนวนครั้งที่เล่น",
-        "o_count": "จำนวน O",
         "performer_card": {
             "age": "อายุ {age} {years_old}",
             "age_context": "อายุ {age} {years_old} ในเรื่องนี้"
@@ -1240,7 +1238,6 @@
     "image_count": "จำนวนรูปภาพ",
     "image_index": "รูปภาพที่ #",
     "megabits_per_second": "{value} mbps",
-    "o_count": "จำนวน O",
     "orientation": "ทิศทาง",
     "parent_of": "บริษัทแม่ของ {children}",
     "pagination": {
@@ -1266,14 +1263,12 @@
     "include_sub_studios": "นับรวมสตูดิโอลูกด้วย",
     "isMissing": "ที่ไม่มี",
     "include_sub_tags": "นับรวมแท็กย่อยด้วย",
-    "last_o_at": "O ครั้งสุดท้ายเมื่อ",
     "instagram": "อินสตาแกรม",
     "interactive": "อินเตอร์แอ็คทีฟ",
     "performer": "นักแสดง",
     "name": "ชื่อเรื่อง",
     "new": "เพิ่ม",
     "none": "ไม่มี",
-    "o_history": "ประวัติ O",
     "organized": "จัดระเบียบแล้ว",
     "disambiguation": "แก้ความกำกวม",
     "distance": "ระยะทาง",
@@ -1292,7 +1287,6 @@
     "loading": {
         "generic": "กำลังโหลด…"
     },
-    "odate_recorded_no": "ไม่มีประวัติ O",
     "parent_tag_count": "จำนวนแท็กย่อย",
     "parent_tags": "แท็กหลัก",
     "part_of": "เป็นส่วนหนึ่งของ {parent}",
@@ -1345,7 +1339,6 @@
     "stash_id_endpoint": "Stash ID Endpoint",
     "stats": {
         "total_play_duration": "ระยะเวลาที่เล่นรวม",
-        "total_o_count": "จำนวน O-Count ทั้งหมด",
         "total_play_count": "จำนวนครั้งที่เล่นรวม",
         "scenes_played": "จำนวนซีนที่เล่นแล้ว",
         "image_size": "ขนาดรูปภาพ",

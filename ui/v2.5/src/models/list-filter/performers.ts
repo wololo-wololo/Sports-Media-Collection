@@ -54,14 +54,12 @@ const sortByOptions = [
       value: "galleries_count",
     },
     {
-      messageID: "o_count",
+      messageID: "o_count_sfw",
       value: "o_counter",
-      sfwMessageID: "o_count_sfw",
     },
     {
-      messageID: "last_o_at",
+      messageID: "last_o_at_sfw",
       value: "last_o_at",
-      sfwMessageID: "last_o_at_sfw",
     },
   ]);
 
@@ -109,9 +107,7 @@ const criterionOptions = [
   createMandatoryNumberCriterionOption("image_count"),
   createMandatoryNumberCriterionOption("gallery_count"),
   createMandatoryNumberCriterionOption("play_count"),
-  createMandatoryNumberCriterionOption("o_counter", "o_count", {
-    sfwMessageID: "o_count_sfw",
-  }),
+  createMandatoryNumberCriterionOption("o_counter", "o_count_sfw"),
   createBooleanCriterionOption("ignore_auto_tag"),
   CountryCriterionOption,
   createNumberCriterionOption("height_cm", "height"),

@@ -189,14 +189,12 @@
     "filesize": "Filstorleik",
     "framerate": "Biletrate",
     "interactive": "",
-    "last_o_at": "Siste O",
     "gallery_count": "Tal på galleri",
     "group_count": "Tal på grupper",
     "marker_count": "Tal på merke",
     "media_info": {
         "play_duration": "Avspelingslengd",
-        "play_count": "Tal på avspelingar",
-        "o_count": "Tal på O"
+        "play_count": "Tal på avspelingar"
     },
     "package_manager": {
         "check_for_updates": "Sjå etter oppdateringar"
@@ -205,7 +203,6 @@
     "pagination": {
         "last": "Siste"
     },
-    "o_count": "Tal på O",
     "organized": "Organisert",
     "playdate_recorded_no": "Ingen avspelingsdato er registrert",
     "play_duration": "Avspelingslengd",
@@ -213,7 +210,6 @@
     "play_count": "Tal på avspelingar",
     "rating": "Karakter",
     "stats": {
-        "total_o_count": "Tal på O"
     },
     "toast": {
         "generating_screenshot": "Genererer skjermbilete …",
@@ -221,7 +217,6 @@
     },
     "sub_tag_count": "Tal på underordna merkelappar",
     "tag_count": "Tal på merkelappar",
-    "odate_recorded_no": "Ingen O-dato er registrert",
     "unknown_date": "Ukjend dato",
     "updated_at": "Oppdatert den",
     "validation": {

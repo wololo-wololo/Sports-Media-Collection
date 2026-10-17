@@ -38,9 +38,8 @@ const sortByOptions = [
   .map(ListFilterOptions.createSortBy)
   .concat([
     {
-      messageID: "o_count",
+      messageID: "o_count_sfw",
       value: "o_counter",
-      sfwMessageID: "o_count_sfw",
     },
   ]);
 const displayModeOptions = [DisplayMode.Grid, DisplayMode.Wall];
@@ -59,9 +58,7 @@ const criterionOptions = [
   FolderCriterionOption,
   GalleriesCriterionOption,
   OrganizedCriterionOption,
-  createMandatoryNumberCriterionOption("o_counter", "o_count", {
-    sfwMessageID: "o_count_sfw",
-  }),
+  createMandatoryNumberCriterionOption("o_counter", "o_count_sfw"),
   ResolutionCriterionOption,
   OrientationCriterionOption,
   ImageIsMissingCriterionOption,

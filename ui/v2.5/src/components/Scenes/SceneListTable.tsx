@@ -334,7 +334,7 @@ export const SceneListTable: React.FC<ISceneListTableProps> = (
     },
     {
       value: "o_counter",
-      label: intl.formatMessage({ id: "o_count" }),
+      label: intl.formatMessage({ id: "o_count_sfw" }),
       render: (s) => <>{s.o_counter}</>,
     },
     {

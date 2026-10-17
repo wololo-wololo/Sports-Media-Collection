@@ -18,7 +18,6 @@ import {
   faThumbtack,
 } from "@fortawesome/free-solid-svg-icons";
 import { ISortByOption } from "src/models/list-filter/filter-options";
-import { useConfigurationContext } from "src/hooks/Config";
 import ClearableInput from "../Shared/ClearableInput";
 import useFocus from "src/utils/focus";
 import ScreenUtils from "src/utils/screen";
@@ -50,9 +49,6 @@ export const SortBySelect: React.FC<{
   onReshuffleRandomSort,
 }) => {
   const intl = useIntl();
-  const { configuration } = useConfigurationContext();
-  const { sfwContentMode } = configuration.interface;
-
   const [filter, setFilter] = React.useState("");
 
   const focusOnOpen = !ScreenUtils.isTouch();
@@ -60,25 +56,16 @@ export const SortBySelect: React.FC<{
   const [, setFocus] = focusRef;
 
   const currentSortBy = options.find((o) => o.value === sortBy);
-  const currentSortByMessageID = currentSortBy
-    ? !sfwContentMode
-      ? currentSortBy.messageID
-      : (currentSortBy.sfwMessageID ?? currentSortBy.messageID)
-    : "";
+  const currentSortByMessageID = currentSortBy?.messageID ?? "";
 
   const sortedOptions: IMessageValue[] = useMemo(() => {
     return options
-      .map((o) => {
-        const messageID = !sfwContentMode
-          ? o.messageID
-          : (o.sfwMessageID ?? o.messageID);
-        return {
-          message: intl.formatMessage({ id: messageID }),
-          value: o.value,
-        };
-      })
+      .map((o) => ({
+        message: intl.formatMessage({ id: o.messageID }),
+        value: o.value,
+      }))
       .sort((a, b) => a.message.localeCompare(b.message));
-  }, [intl, options, sfwContentMode]);
+  }, [intl, options]);
 
   const filteredOptions = useMemo(() => {
     if (!filter) return sortedOptions;

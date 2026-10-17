@@ -2,7 +2,7 @@
     "setup": {
         "welcome_to_stash": "Selamat datang di Stash",
         "paths": {
-            "where_is_your_porn_located": "Di mana lokasi porno Anda?",
+            "where_is_your_content_located": "Di mana lokasi porno Anda?",
             "description": "Selanjutnya, kita perlu menentukan di mana lokasi koleksi bokep Anda, dan di mana menyimpan pangkalan data Stash, berkas yang dihasilkan, dan berkas tembolok. Pengaturan ini dapat diubah nanti jika diperlukan."
         },
         "success": {
@@ -188,8 +188,7 @@
         "scenes_played": "Adegan diputar",
         "total_play_count": "Total Jumlah Pemutaran",
         "scenes_size": "Ukuran adegan",
-        "total_play_duration": "Total Durasi Pemutaran",
-        "total_o_count": "Total Jumlah Crot"
+        "total_play_duration": "Total Durasi Pemutaran"
     },
     "studio": "Studio",
     "studio_tagger": {
@@ -769,7 +768,6 @@
     "cover_image": "Foto Sampul",
     "death_date": "Tanggal Kematian",
     "death_year": "Tahun Kematian",
-    "last_o_at": "Terakhir Crot Pada",
     "last_played_at": "Terakhir Dimainkan Pada",
     "login": {
         "username": "Nama Pengguna",
@@ -779,12 +777,10 @@
     },
     "marker_count": "Jumlah Penanda",
     "media_info": {
-        "o_count": "Jumlah Crot",
         "performer_card": {
             "age": "{age} {years_old}",
             "age_context": "{age} {years_old} saat produksi"
         },
         "phash": "PHash"
-    },
-    "o_count": "Jumlah Crot"
+    }
 }

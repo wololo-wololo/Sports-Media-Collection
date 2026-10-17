@@ -514,9 +514,6 @@ const SetPathsStep: React.FC<IWizardStep> = ({ goBack, next }) => {
   const [stashes, setStashes] = useState<GQL.StashConfig[]>(
     setupState.stashes ?? []
   );
-  const [sfwContentMode, setSfwContentMode] = useState(
-    setupState.sfwContentMode ?? false
-  );
 
   const [databaseFile, setDatabaseFile] = useState(
     setupState.databaseFile ?? ""
@@ -555,7 +552,6 @@ const SetPathsStep: React.FC<IWizardStep> = ({ goBack, next }) => {
       cacheLocation,
       blobsLocation: storeBlobsInDatabase ? "" : blobsLocation,
       storeBlobsInDatabase,
-      sfwContentMode,
     };
     next(input);
   }
@@ -583,31 +579,15 @@ const SetPathsStep: React.FC<IWizardStep> = ({ goBack, next }) => {
       <section>
         <Form.Group id="stashes">
           <h3>
-            <FormattedMessage id="setup.paths.where_is_your_porn_located" />
+            <FormattedMessage id="setup.paths.where_is_your_content_located" />
           </h3>
           <p>
-            <FormattedMessage id="setup.paths.where_is_your_porn_located_description" />
+            <FormattedMessage id="setup.paths.where_is_your_content_located_description" />
           </p>
           <Card>
             <StashConfiguration
               stashes={stashes}
               setStashes={(s) => setStashes(s)}
-            />
-          </Card>
-        </Form.Group>
-        <Form.Group id="sfw_content">
-          <h3>
-            <FormattedMessage id="setup.paths.sfw_content_settings" />
-          </h3>
-          <p>
-            <FormattedMessage id="setup.paths.sfw_content_settings_description" />
-          </p>
-          <Card>
-            <Form.Check
-              id="use-sfw-content-mode"
-              checked={sfwContentMode}
-              label={<FormattedMessage id="setup.paths.use_sfw_content_mode" />}
-              onChange={() => setSfwContentMode(!sfwContentMode)}
             />
           </Card>
         </Form.Group>

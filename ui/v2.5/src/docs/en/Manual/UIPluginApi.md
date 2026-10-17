@@ -355,7 +355,6 @@ Returns `void`.
 - `StudioRecommendationRow`
 - `StudioSelect`
 - `StudioSelect.sort`
-- `SweatDrops`
 - `TabTitleCounter`
 - `TagCard`
 - `TagCard.Details`

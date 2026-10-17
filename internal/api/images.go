@@ -2,7 +2,6 @@ package api
 
 import (
 	"errors"
-	"fmt"
 	"io"
 	"io/fs"
 	"os"
@@ -11,7 +10,6 @@ import (
 	"github.com/stashapp/stash/internal/static"
 	"github.com/stashapp/stash/pkg/hash"
 	"github.com/stashapp/stash/pkg/logger"
-	"github.com/stashapp/stash/pkg/models"
 )
 
 type imageBox struct {
@@ -73,21 +71,7 @@ func (box *imageBox) GetRandomImageByName(name string) ([]byte, error) {
 	return io.ReadAll(img)
 }
 
-var performerBox *imageBox
-var performerBoxMale *imageBox
 var performerBoxCustom *imageBox
-
-func init() {
-	var err error
-	performerBox, err = newImageBox(static.Sub(static.Performer))
-	if err != nil {
-		panic(fmt.Sprintf("loading performer images: %v", err))
-	}
-	performerBoxMale, err = newImageBox(static.Sub(static.PerformerMale))
-	if err != nil {
-		panic(fmt.Sprintf("loading male performer images: %v", err))
-	}
-}
 
 func initCustomPerformerImages(customPath string) {
 	if customPath != "" {
@@ -102,7 +86,7 @@ func initCustomPerformerImages(customPath string) {
 	}
 }
 
-func getDefaultPerformerImage(name string, gender *models.GenderEnum, sfwMode bool) []byte {
+func getDefaultPerformerImage(name string) []byte {
 	// try the custom box first if we have one
 	if performerBoxCustom != nil {
 		ret, err := performerBoxCustom.GetRandomImageByName(name)
@@ -112,28 +96,5 @@ func getDefaultPerformerImage(name string, gender *models.GenderEnum, sfwMode bo
 		logger.Warnf("error loading custom default performer image: %v", err)
 	}
 
-	if sfwMode {
-		return static.ReadAll(static.DefaultSFWPerformerImage)
-	}
-
-	var g models.GenderEnum
-	if gender != nil {
-		g = *gender
-	}
-
-	var box *imageBox
-	switch g {
-	case models.GenderEnumFemale, models.GenderEnumTransgenderFemale:
-		box = performerBox
-	case models.GenderEnumMale, models.GenderEnumTransgenderMale:
-		box = performerBoxMale
-	default:
-		box = performerBox
-	}
-
-	ret, err := box.GetRandomImageByName(name)
-	if err != nil {
-		logger.Warnf("error loading default performer image: %v", err)
-	}
-	return ret
+	return static.ReadAll(static.DefaultPerformerImage)
 }

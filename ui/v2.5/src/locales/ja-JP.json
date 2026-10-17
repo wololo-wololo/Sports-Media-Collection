@@ -804,10 +804,6 @@
             "performer_list": {
                 "heading": "AV女優・男優リスト"
             },
-            "sfw_mode": {
-                "description": "健全なコンテンツの為にstashを使用している場合に有効化しましょう。 アダルトコンテンツに関連したUIは隠されるか健全化されて表示されます。",
-                "heading": "SFWコンテンツモード"
-            },
             "custom_title": {
                 "heading": "カスタムタイトル",
                 "description": "ページタイトルに追加するカスタムテキスト。空欄の場合は'Stash'がデフォルトになります。"
@@ -1229,8 +1225,8 @@
             "where_can_stash_store_its_database_description": "Stashは、コレクションのメタデータを保存するためにsqliteデータベースを使用しています。初期設定では、設定ファイルが保存されているディレクトリに<code> stash-go.sqlite</code>という名称で保存されます。変更したい場合は、絶対または現在の作業ディレクトリまでの相対パスを含めたファイル名を入力してください。",
             "where_can_stash_store_its_generated_content": "Stashはどこに生成コンテンツを保存すればよいですか？",
             "where_can_stash_store_its_generated_content_description": "サムネイル、プレビューとスプライトイメージを使用できるようにするため、Stashは画像と動画を生成します。これには、未サポートのファイル形式を変換したものも含まれます。初期設定では、Stashは、設定ファイルが保存されているディレクトリに<code> generated</code>ディレクトリを作成します。この生成メディアの保存場所を変更したい場合は、絶対または現在の作業ディレクトリまでの相対パスを含めたパスを入力してください。ディレクトリが存在しない場合、Stashが自動的に作成します。",
-            "where_is_your_porn_located": "お宝はどこに眠っていますか？",
-            "where_is_your_porn_located_description": "あなたのお宝動画と画像が保存されているディレクトリを追加してください。Stashは、動画と画像のスキャン時にこれらのディレクトリを使用します。"
+            "where_is_your_content_located": "お宝はどこに眠っていますか？",
+            "where_is_your_content_located_description": "あなたのお宝動画と画像が保存されているディレクトリを追加してください。Stashは、動画と画像のスキャン時にこれらのディレクトリを使用します。"
         },
         "stash_setup_wizard": "Stash セットアップウィザード",
         "success": {
@@ -1277,7 +1273,6 @@
         "scenes_duration": "シーンの再生時間",
         "scenes_size": "シーンサイズ",
         "scenes_played": "再生済みシーン",
-        "total_o_count": "O-Count数",
         "total_o_count_sfw": "健全O-Count数",
         "total_play_count": "総再生数",
         "total_play_duration": "総再生時間"

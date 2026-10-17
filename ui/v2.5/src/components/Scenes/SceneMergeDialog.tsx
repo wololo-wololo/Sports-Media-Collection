@@ -456,7 +456,7 @@ const SceneMergeDetails: React.FC<ISceneMergeDetailsProps> = ({
         />
         <ScrapeDialogRow
           field="o_count"
-          title={intl.formatMessage({ id: "o_count" })}
+          title={intl.formatMessage({ id: "o_count_sfw" })}
           result={oCounter}
           originalField={
             <FormControl

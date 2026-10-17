@@ -1056,8 +1056,8 @@
             "where_can_stash_store_its_database_description": "Stash usa um banco de dados sqlite para armazenar os meta-dados de sua coleção. Por padrão ele será criado como <code>stash-go.sqlite</code> no diretório contendo seu arquivo de configuração. Se deseja alterar isto, por favor indique um arquivo com caminho absoluto ou relativo ao diretório de trabalho atual.",
             "where_can_stash_store_its_generated_content": "Onde o Stash pode armazenar os arquivos de suporte que forem gerados?",
             "where_can_stash_store_its_generated_content_description": "A fim de fornecer miniaturas, pré-visualizações e sprites, Stash gera imagens e vídeos. Isto também inclui transcodificações para formatos de arquivos não suportados. Por padrão, o Stash irá criar o diretório <code>generated</code> no diretório contento seu arquivo de configuração. Se deseja alterar onde esses arquivos gerados serão armazenados, por favor indique um caminho absoluto ou relativo ao diretório de trabalho atual. O stash irá criar este diretório caso ele já não exista.",
-            "where_is_your_porn_located": "Onde seu conteúdo está localizado?",
-            "where_is_your_porn_located_description": "Adicione diretórios contendo seus vídeos e imagens . O Stash irá usar esses diretórios para encontrar vídeos e imagens durante o scan."
+            "where_is_your_content_located": "Onde seu conteúdo está localizado?",
+            "where_is_your_content_located_description": "Adicione diretórios contendo seus vídeos e imagens . O Stash irá usar esses diretórios para encontrar vídeos e imagens durante o scan."
         },
         "stash_setup_wizard": "Assistente de configuração Stash",
         "success": {

@@ -777,7 +777,6 @@ declare namespace PluginApi {
     StudioPage: React.FC<any>;
     StudioRecommendationRow: React.FC<any>;
     StudioSelect: React.FC<any>;
-    SweatDrops: React.FC<any>;
     TabTitleCounter: React.FC<any>;
     TagIDSelect: React.FC<any>;
     "TagCard.Details": React.FC<any>;

@@ -835,10 +835,6 @@
                 },
                 "heading": "Darsteller Liste"
             },
-            "sfw_mode": {
-                "description": "Aktivieren wenn man Stash für das speichern von SFW content benutzt. Versteckt oder Ändernt ein paar NFSW eigenschaften des UI.",
-                "heading": "SFW Content Modus"
-            },
             "custom_title": {
                 "description": "Benutzerdefinierter Text, der an den Seitentitel angehängt werden soll. Falls leer, wird Standard \"Stash\" verwendet.",
                 "heading": "Benutzerdefinierter Titel"
@@ -1006,7 +1002,6 @@
         "unsaved_changes": "Nicht gespeicherte Änderungen. Bist du sicher dass du die Seite verlassen willst?",
         "clear_play_history_confirm": "Bist du sicher, dass du den Wiedergabeverlauf löschen möchtest?",
         "performers_found": "{count} Darsteller:innen gefunden",
-        "clear_o_history_confirm": "Möchten Sie wirklich den O-Verlauf löschen?",
         "overwrite_filter_warning": "Der gespeicherte Filter \"{entityName}\" wird überschrieben.",
         "set_default_filter_confirm": "Sind Sie sicher, dass Sie diesen Filter als Standard festlegen möchten?",
         "clear_o_history_confirm_sfw": "Bist du dir sicher das du den Verlauf löschen willst?",
@@ -1176,8 +1171,7 @@
         "play_count": "Anzahl Wiedergaben",
         "play_duration": "Abspielzeit",
         "stream": "Stream",
-        "video_codec": "Video-Codec",
-        "o_count": "O Anzahl"
+        "video_codec": "Video-Codec"
     },
     "megabits_per_second": "{value} Megabit pro Sekunde",
     "metadata": "Metadaten",
@@ -1328,13 +1322,10 @@
             "where_can_stash_store_its_database_warning": "ACHTUNG: Ein Speicherort abseits des Systems auf dem Stash ausgeführt wird (z.B. speichern der Datenbank auf einem Netzwerkspeicher während Stash auf einem anderen Computer ausgeführt wird) ist <strong>nicht unterstützt</strong>! SQLite ist nicht für Nutzung über das Netzwerk ausgelegt und der Versuch, dies zu tun, kann sehr leicht dazu führen, dass Ihre gesamte Datenbank beschädigt wird.",
             "where_can_stash_store_its_generated_content": "Wo darf Stash seine generierten Hilfsdateien abspeichern?",
             "where_can_stash_store_its_generated_content_description": "Um Thumbnails, Previews und Sprites zur Verfügung zu stellen, generiert Stash diese aus deinen Videos und Bildern. Das schließt auch Transkodierungen von nicht unterstützten Dateiformaten mit ein. Standardmäßig wird Stash diese im Ordner <code>generated</code> abspeichern, der sich am Ort der Konfigurationsdatei befindet. Wenn du das ändern möchtest, gebe bitte einen absoluten oder relativen (gegenüber der aktuellen working directory) Pfad an. Stash wird den Ordner erstellen, sollte er noch nicht existieren.",
-            "where_is_your_porn_located": "Wo finden wir deine Sammlung?",
-            "where_is_your_porn_located_description": "Füge Ordner hinzu, in denen sich deine Videos und Bilder befinden. Stash wird diese Ordner nutzen, um Videos und Bilder in das System einzupflegen.",
+            "where_is_your_content_located": "Wo finden wir deine Sammlung?",
+            "where_is_your_content_located_description": "Füge Ordner hinzu, in denen sich deine Videos und Bilder befinden. Stash wird diese Ordner nutzen, um Videos und Bilder in das System einzupflegen.",
             "path_to_blobs_directory_empty_for_default": "Pfad zum Verzeichnis der blobs (standardmäßig leer)",
-            "store_blobs_in_database": "blobs in der Datenbank speichern",
-            "sfw_content_settings": "Benutzt du stash auch für SFW Inhalte?",
-            "sfw_content_settings_description": "Stash kann verwendet werden, um SFW Inhalte wie Fotografie, Kunst, Comics und mehr zu verwalten. Wenn du diese Option aktivierst, wird die Oberfläche für SFW Inhalte angepasst.",
-            "use_sfw_content_mode": "Benutze den Modus für SFW Inhalte"
+            "store_blobs_in_database": "blobs in der Datenbank speichern"
         },
         "stash_setup_wizard": "Einrichtungshelfer für Stash",
         "success": {
@@ -1386,7 +1377,6 @@
         "scenes_duration": "Szenendauer",
         "scenes_size": "Szenenspeicher",
         "scenes_played": "Szenen Abgespielt",
-        "total_o_count": "Insgesamt Anzahl der Os",
         "total_play_count": "Gesamtanzahl der Wiedergaben",
         "total_play_duration": "Spieldauer insgesamt",
         "total_o_count_sfw": "Gefällt-Mir gesamt"
@@ -1526,7 +1516,6 @@
         "any_of": "Irgendeine von",
         "none": "Keine"
     },
-    "o_count": "O Anzahl",
     "studio_tags": "Studio Tags",
     "custom_fields": {
         "title": "Benutzerdefinierte Felder",
@@ -1557,9 +1546,6 @@
     "include_sub_tag_content": "Inhalt von Untertags einschließen",
     "index_of_total": "{index} von {total}",
     "include_sub_studio_content": "Inhalt von Unterstudios einschließen",
-    "last_o_at": "Letztes O",
-    "o_history": "O Verlauf",
-    "odate_recorded_no": "Kein O Datum Aufgezeichnet",
     "orientation": "Orientierung",
     "containing_group_count": "Enthaltende Gruppen Anzahl",
     "history": "Verlauf",

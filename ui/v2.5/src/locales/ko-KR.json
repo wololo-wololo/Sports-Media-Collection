@@ -874,10 +874,6 @@
                     }
                 }
             },
-            "sfw_mode": {
-                "description": "건전한 컨텐츠를 저장하기 위해 Stash를 사용한다면 활성화하세요. 성인 컨텐츠와 관련된 UI 요소들을 숨기거나 변경시킵니다.",
-                "heading": "건전 컨텐츠 모드"
-            },
             "custom_title": {
                 "description": "페이지 제목에 추가되는 커스텀 텍스트입니다. 공백일 경우 기본값 'Stash'가 사용됩니다.",
                 "heading": "커스텀 타이틀"
@@ -1059,7 +1055,6 @@
         "set_image_url_title": "이미지 URL",
         "unsaved_changes": "저장되지 않은 변경 사항들이 있습니다. 그래도 나가겠습니까?",
         "performers_found": "{count} 명의 배우들을 찾았습니다",
-        "clear_o_history_confirm": "정말 싸버린 기록을 삭제하시겠습니까?",
         "clear_play_history_confirm": "정말 재생 기록을 삭제하시겠습니까?",
         "merge": {
             "destination": "~으로 병합 (병합 결과)",
@@ -1241,7 +1236,6 @@
         "play_duration": "재생된 길이",
         "stream": "스트림",
         "video_codec": "비디오 코덱",
-        "o_count": "싼 횟수",
         "md5": "MD5 체크섬",
         "oshash": "oshash",
         "oshash_meaning": "파일 일치 여부 확인 해시 (OpenSubtitles Hash)",
@@ -1396,13 +1390,10 @@
             "where_can_stash_store_its_database_warning": "경고: Stash가 동작하는 곳이 아닌 다른 시스템에 데이터베이스를 저장하는 것은 <strong>지원되지 않습니다</strong>! (예시: 데이터베이스를 NAS에 저장하면서 Stash 서버를 다른 컴퓨터에서 돌리는 행위) SQLite는 네트워크를 넘어 사용되도록 만들어지지 않았으며, 이런 행위를 함으로써 데이터베이스가 아주 쉽게 망가지게 될 수 있습니다.",
             "where_can_stash_store_its_generated_content": "생성된 컨텐츠를 어디에 저장할까요?",
             "where_can_stash_store_its_generated_content_description": "Stash에서는 썸네일, 미리보기, 스프라이트로 사용할 이미지와 비디오 파일을 생성합니다. 여기에는 지원되지 않는 파일 형식들의 변환본도 포함됩니다. Stash에서는 기본값으로, 설정 파일이 위치한 폴더 안에 <code>generated</code> 폴더를 만들 것입니다. 생성된 미디어 파일들이 저장되는 위치를 변경하고 싶다면, 절대 경로 혹은 상대 경로(현재 폴더 기준)를 적어주세요. 적혀진 경로에 해당 폴더가 없다면 자동으로 생성됩니다.",
-            "where_is_your_porn_located": "컨텐츠가 있는 위치가 어딘가요?",
-            "where_is_your_porn_located_description": "영상과 이미지가 들어있는 폴더를 추가하세요. 이 폴더들을 스캔하여 비디오와 이미지를 찾을 것입니다.",
+            "where_is_your_content_located": "컨텐츠가 있는 위치가 어딘가요?",
+            "where_is_your_content_located_description": "영상과 이미지가 들어있는 폴더를 추가하세요. 이 폴더들을 스캔하여 비디오와 이미지를 찾을 것입니다.",
             "path_to_blobs_directory_empty_for_default": "Blob 폴더 경로 (빈 칸으로 두면 기본값을 사용합니다)",
-            "store_blobs_in_database": "데이터베이스에 Blob 저장",
-            "sfw_content_settings": "Stash를 성인물 등이 아닌 건전한 컨텐츠 저장 용도로 사용하시나요?",
-            "sfw_content_settings_description": "Stash는 사진, 그림, 만화 등등의 건전한 컨텐츠를 관리하기 위해 사용될 수 있습니다. 이 옵션을 활성화하면 일부 UI 동작이 건전한 컨텐츠에 더 적합하도록 조정됩니다.",
-            "use_sfw_content_mode": "건전 컨텐츠 모드 사용"
+            "store_blobs_in_database": "데이터베이스에 Blob 저장"
         },
         "stash_setup_wizard": "Stash 설정 마법사",
         "success": {
@@ -1454,7 +1445,6 @@
         "scenes_duration": "전체 영상 길이",
         "scenes_size": "전체 영상 크기",
         "scenes_played": "재생된 영상",
-        "total_o_count": "싸버린 총 횟수",
         "total_play_count": "총 재생 횟수",
         "total_play_duration": "총 재생 길이",
         "total_o_count_sfw": "좋아요 총 횟수"
@@ -1556,8 +1546,6 @@
     "photographer": "사진가",
     "history": "기록",
     "index_of_total": "총 {total}개 중 {index}",
-    "o_history": "싸버린 기록",
-    "odate_recorded_no": "싸버린 날짜 기록 없음",
     "package_manager": {
         "no_upgradable": "업그레이드 가능한 패키지 없음",
         "package": "패키지",
@@ -1589,13 +1577,11 @@
         "selected_only": "선택된 것만",
         "required_by": "{packages}가 정상 동작하기 위해 설치되어야 함"
     },
-    "o_count": "싼 횟수",
     "orientation": "방향",
     "parent_studio": "부모 스튜디오",
     "subsidiary_studio_count": "자회사 스튜디오 개수",
     "time": "시간",
     "video_codec": "비디오 코덱",
-    "last_o_at": "마지막으로 싼 날짜",
     "playdate_recorded_no": "재생 날짜 기록 없음",
     "play_history": "재생 기록",
     "primary_tag": "주 태그",

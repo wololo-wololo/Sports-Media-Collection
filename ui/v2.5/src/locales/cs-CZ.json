@@ -855,10 +855,6 @@
                 "description": "Je-li povoleno, budou funscripty poskytovány přímo ze Stash do vašeho zařízení Handy bez použití serveru Handy třetí strany. Vyžaduje, aby byl Stash dostupný z vašeho zařízení Handy a vygenerovaný API klíč, pokud má Stash nakonfigurované údaje.",
                 "heading": "Funscripty podávejte přímo"
             },
-            "sfw_mode": {
-                "description": "Zapněte zda použáváte stash k ukládání SFW obsahu. Schová nebo změní některé aspekty uživatelského rozhraní související s obsahem pro dospělé.",
-                "heading": "Režim obsahu SFW"
-            },
             "performer_list": {
                 "heading": "List účinkujicích",
                 "options": {
@@ -1053,7 +1049,6 @@
         "reassign_files": {
             "destination": "Změnit přiřazení na"
         },
-        "clear_o_history_confirm": "Opravdu chcete vymazat historii O?",
         "clear_play_history_confirm": "Opravdu chcete vymazat historii přehrávání?",
         "delete_entity_simple_desc": "{count, plural, one {Opravdu chcete smazat tuto {singularEntity}?} other {Opravdu chcete smazat tyto {pluralEntity}?}}",
         "performers_found": "{count} nalezených účinkujících",
@@ -1248,7 +1243,7 @@
     "setup": {
         "paths": {
             "where_can_stash_store_its_generated_content_description": "Aby Stash mohl poskytovat miniatury, náhledy a sprity generuje Stash obrázky a videa. To zahrnuje také transkódování pro nepodporované formáty souborů. Ve výchozím nastavení Stash vytvoří <code>generated</code> adresář v adresáři obsahujícím váš konfigurační soubor. Pokud chcete změnit, kam se budou tato generovaná media ukládat, zadejte prosím absolutní nebo relativní (k aktuálnímu pracovnímu adresáři) cestu. Stash vytvoří tento adresář, pokud ještě neexistuje.",
-            "where_is_your_porn_located_description": "Přidejte adresáře obsahující váše videa a obrázky. Stash použije tyto adresáře k vyhledání videí a obrázků během skenování.",
+            "where_is_your_content_located_description": "Přidejte adresáře obsahující váše videa a obrázky. Stash použije tyto adresáře k vyhledání videí a obrázků během skenování.",
             "where_can_stash_store_blobs_description": "Kam může Stash ukládat binární data jako jsou obaly scén, účinkující, studia a obrázky tagů, buď v databázi nebo v souborovém systému. Ve výchozím nastavení bude tato data ukládat do souborového systému v podadresáři <code>blobs</code> v adresáři obsahujícím váš konfigurační soubor. Pokud to chcete změnit, zadejte prosím absolutní nebo relativní (k aktuálnímu pracovnímu adresáři) cestu. Stash vytvoří tento adresář, pokud ještě neexistuje.",
             "path_to_cache_directory_empty_for_default": "cesta k adresáři mezipaměti (ve výchozím nastavení prázdné)",
             "path_to_generated_directory_empty_for_default": "cesta k adresáři vygenerovaných souborů (ve výchozím nastavení prázdné)",
@@ -1260,16 +1255,13 @@
             "description": "Dále musíme určit, kde najdeme vaši sbírku obsahu a kam uložit databázi Stash, vygenerované soubory a soubory mezipaměti. Tato nastavení lze v případě potřeby později změnit.",
             "path_to_blobs_directory_empty_for_default": "cesta k adresáři blobů (ve výchozím nastavení prázdné)",
             "stash_alert": "Nebyla vybrána žádná cesta knihovny. Žádné médium nebude možné naskenovat do Stash. Jste si jisti?",
-            "where_is_your_porn_located": "Kde se nachází váš obsah?",
+            "where_is_your_content_located": "Kde se nachází váš obsah?",
             "where_can_stash_store_cache_files_description": "Aby některé funkce, jako je živé transkódování HLS/DASH, fungovaly, vyžaduje Stash adresář mezipaměti pro dočasné soubory. Ve výchozím nastavení Stash vytvoří adresář <code>mezipaměť</code> v adresáři obsahujícím váš konfigurační soubor. Pokud to chcete změnit, zadejte prosím absolutní nebo relativní (k aktuálnímu pracovnímu adresáři) cestu. Stash vytvoří tento adresář, pokud ještě neexistuje.",
             "where_can_stash_store_its_database": "Kde může Stash uložit svou databázi?",
             "where_can_stash_store_blobs": "Kde může Stash ukládat binární data databáze?",
             "where_can_stash_store_blobs_description_addendum": "Případně můžete tato data uložit do databáze. <strong>Poznámka:</strong> Tím se zvětší velikost souboru databáze a prodlouží se doba migrace databáze.",
             "where_can_stash_store_its_database_description": "Stash používá databázi SQLite k ukládání metadat obsahu. Ve výchozím nastavení bude tento soubor vytvořen jako <code>stash-go.sqlite</code> v adresáři obsahujícím váš konfigurační soubor. Pokud to chcete změnit, zadejte prosím absolutní nebo relativní (k aktuálnímu pracovnímu adresáři) název souboru.",
-            "store_blobs_in_database": "Uložte bloby do databáze",
-            "sfw_content_settings": "Používáte stash k SFW obsahu?",
-            "sfw_content_settings_description": "Stash lze použít ke správě SFW obsahu, jako jsou fotografie, umění, komiksy a další. Povolení této možnosti upraví některé vlastnosti uživatelského rozhraní tak, aby byly vhodnější pro SFW obsah.",
-            "use_sfw_content_mode": "Použít režim obsahu SFW"
+            "store_blobs_in_database": "Uložte bloby do databáze"
         },
         "stash_setup_wizard": "Průvodce nastavením Stash",
         "success": {
@@ -1408,7 +1400,6 @@
         "interactive_speed": "Interaktivní rychlost",
         "phash": "PHash",
         "play_count": "Počet přehrání",
-        "o_count": "Počet O",
         "md5": "Kontrolní součet MD5",
         "oshash": "oshash",
         "oshash_meaning": "Hash OpenSubtitles",
@@ -1473,9 +1464,6 @@
     "primary_tag": "Primární tag",
     "queue": "Fronta",
     "random": "Náhodně",
-    "last_o_at": "Poslední O",
-    "o_history": "Historie O",
-    "odate_recorded_no": "Žádný Datum O Nezaznamenán",
     "part_of": "Součást skupiny {parent}",
     "penis": "Penis",
     "penis_length": "Délka penisu",
@@ -1582,7 +1570,6 @@
         "websocket_connection_failed": "Nelze vytvořit připojení websocket: podrobnosti naleznete v konzoly prohlížeče",
         "websocket_connection_reestablished": "Připojení Websocket bylo obnoveno"
     },
-    "o_count": "Počet O",
     "stash_id_endpoint": "URL koncového bodu (endpoint) Stash ID",
     "stash_ids": "Stash IDs",
     "statistics": "Statistiky",
@@ -1590,7 +1577,6 @@
         "image_size": "Velikost obrázků",
         "scenes_duration": "Trvání scén",
         "scenes_played": "Přehrátých scén",
-        "total_o_count": "Celkový Počet O",
         "total_play_duration": "Celková doba přehrávání",
         "scenes_size": "Velikost scén",
         "total_play_count": "Celkový počet přehrátí",

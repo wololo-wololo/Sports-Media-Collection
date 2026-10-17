@@ -2,10 +2,8 @@ import { faEye, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import React from "react";
 import { Button, ButtonGroup } from "react-bootstrap";
 import { Icon } from "src/components/Shared/Icon";
-import { SweatDrops } from "./SweatDrops";
 import cx from "classnames";
 import { useIntl } from "react-intl";
-import { useConfigurationContext } from "src/hooks/Config";
 
 interface ICountButtonProps {
   value: number;
@@ -67,17 +65,12 @@ export const ViewCountButton: React.FC<CountButtonPropsNoIcon> = (props) => {
 
 export const OCounterButton: React.FC<CountButtonPropsNoIcon> = (props) => {
   const intl = useIntl();
-  const { configuration } = useConfigurationContext();
-  const { sfwContentMode } = configuration.interface;
-
-  const icon = !sfwContentMode ? <SweatDrops /> : <Icon icon={faThumbsUp} />;
-  const messageID = !sfwContentMode ? "o_count" : "o_count_sfw";
 
   return (
     <CountButton
       {...props}
-      icon={icon}
-      title={intl.formatMessage({ id: messageID })}
+      icon={<Icon icon={faThumbsUp} />}
+      title={intl.formatMessage({ id: "o_count_sfw" })}
       countTitle={intl.formatMessage({ id: "actions.view_history" })}
       dataAction="o-counter"
     />

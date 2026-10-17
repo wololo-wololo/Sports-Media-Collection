@@ -875,10 +875,6 @@
                     }
                 }
             },
-            "sfw_mode": {
-                "description": "Activez cette option si vous utilisez Stash pour stocker du contenu SFW. Masque ou modifie certains aspects de l'interface utilisateur liés au contenu pour adultes.",
-                "heading": "Mode contenu SFW"
-            },
             "custom_title": {
                 "description": "Texte personnalisé à ajouter au titre de la page. Si vide, \"Stash\" par défaut.",
                 "heading": "Titre personnalisé"
@@ -1069,7 +1065,6 @@
         "scrape_results_scraped": "Extraits",
         "set_image_url_title": "URL de l'image",
         "unsaved_changes": "Modifications non sauvegardées. Vous êtes sûr de vouloir quitter ?",
-        "clear_o_history_confirm": "Êtes-vous sûr de vouloir effacer l'historique des O ?",
         "clear_play_history_confirm": "Êtes-vous sûr de vouloir effacer l'historique de lecture ?",
         "overwrite_filter_warning": "Le filtre enregistré \"{entityName}\" sera remplacé.",
         "set_default_filter_confirm": "Êtes-vous sûr de vouloir définir ce filtre par défaut ?",
@@ -1243,7 +1238,6 @@
         "play_duration": "Temps de lecture",
         "stream": "Flux",
         "video_codec": "Codec vidéo",
-        "o_count": "Nombre d'O",
         "md5": "Somme de contrôle MD5",
         "oshash": "oshash",
         "oshash_meaning": "Empreinte OpenSubtitles",
@@ -1401,11 +1395,8 @@
             "where_can_stash_store_its_database_warning": "AVERTISSEMENT : Le stockage de la base de données sur un système différent de celui à partir duquel Stash est exécuté (par exemple, le stockage de la base de données sur un NAS tout en exécutant le serveur Stash sur un autre ordinateur) est <strong>non pris en charge</strong> ! SQLite n'est pas conçu pour être utilisé sur un réseau, et toute tentative de le faire peut très facilement entraîner la corruption de l'ensemble de votre base de données.",
             "where_can_stash_store_its_generated_content": "Où Stash peut-il stocker son contenu généré ?",
             "where_can_stash_store_its_generated_content_description": "Afin de produire les vignettes, aperçus et sprites, Stash génère des images et des vidéos. Cela inclut également les transcodes pour les formats de fichiers non pris en charge. Par défaut, Stash crée un répertoire <code>generated</code> dans le répertoire contenant votre fichier de configuration. Si vous souhaitez modifier l'emplacement où seront stockés les médias générés, veuillez saisir un chemin absolu ou relatif ( vers le répertoire de travail actuel). Stash créera ce répertoire s'il n'existe pas déjà.",
-            "where_is_your_porn_located": "Où se trouve votre contenu ?",
-            "where_is_your_porn_located_description": "Ajoutez des répertoires contenant vos vidéos et images. Stash utilisera ces répertoires pour rechercher les vidéos et les images lors de l'analyse.",
-            "sfw_content_settings": "Utiliser Stash pour du contenu SFW ?",
-            "sfw_content_settings_description": "Stash peut être utilisé pour gérer du contenu SFW tel que des photographies, des illustrations, des bandes dessinées, et plus. L'activation de cette option modifiera certains comportements de l'interface utilisateur pour les rendre plus appropriés au contenu SFW.",
-            "use_sfw_content_mode": "Utiliser le mode de contenu SFW"
+            "where_is_your_content_located": "Où se trouve votre contenu ?",
+            "where_is_your_content_located_description": "Ajoutez des répertoires contenant vos vidéos et images. Stash utilisera ces répertoires pour rechercher les vidéos et les images lors de l'analyse."
         },
         "stash_setup_wizard": "Assistant de configuration de Stash",
         "success": {
@@ -1457,7 +1448,6 @@
         "scenes_duration": "Durée des scènes",
         "scenes_played": "Scènes visionnées",
         "scenes_size": "Poids des scènes",
-        "total_o_count": "Nombre total de O-",
         "total_play_count": "Nombre de visionnage total",
         "total_play_duration": "Temps de visionnage total",
         "total_o_count_sfw": "Total de J'aime"
@@ -1592,10 +1582,6 @@
         "websocket_connection_reestablished": "Connexion websocket rétablie",
         "websocket_connection_failed": "Impossible d'établir une connexion websocket : voir la console du navigateur pour plus de détails"
     },
-    "last_o_at": "Dernier O le",
-    "o_count": "Nombre d'O",
-    "o_history": "Historique d'O",
-    "odate_recorded_no": "Aucun O daté enregistré",
     "subsidiary_studio_count": "Nombre de studios affiliés",
     "tag_sub_tag_tooltip": "A des étiquettes affiliées",
     "time": "Temps",

@@ -18,14 +18,9 @@ type PerformerFinder interface {
 	GetImage(ctx context.Context, performerID int) ([]byte, error)
 }
 
-type sfwConfig interface {
-	GetSFWContentMode() bool
-}
-
 type performerRoutes struct {
 	routes
 	performerFinder PerformerFinder
-	sfwConfig       sfwConfig
 }
 
 func (rs performerRoutes) Routes() chi.Router {
@@ -59,7 +54,7 @@ func (rs performerRoutes) Image(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if len(image) == 0 {
-		image = getDefaultPerformerImage(performer.Name, performer.Gender, rs.sfwConfig.GetSFWContentMode())
+		image = getDefaultPerformerImage(performer.Name)
 	}
 
 	utils.ServeImage(w, r, image)

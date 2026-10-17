@@ -865,10 +865,6 @@
                     }
                 }
             },
-            "sfw_mode": {
-                "description": "如果使用 stash 存储SFW(工作场合安全)内容，请启用。它隐藏或更改了 UI 中与成人内容相关的某些方面。",
-                "heading": "SFW(工作场合安全)内容模式"
-            },
             "custom_title": {
                 "description": "附加在页面标题后的自定义文本。如果是空的，默认是“Stash”。",
                 "heading": "用户标题"
@@ -1059,7 +1055,6 @@
         "set_image_url_title": "图片链接",
         "unsaved_changes": "更改未保存，确定离开吗？",
         "performers_found": "找到{count} 个演员",
-        "clear_o_history_confirm": "真的确定要清空高潮记录吗?",
         "clear_play_history_confirm": "真的确定要清空播放历史?",
         "set_default_filter_confirm": "你确定要设置这个过滤器为默认吗？",
         "overwrite_filter_warning": "已保存的过滤器 \"{entityName}\" 将被覆盖。",
@@ -1232,7 +1227,6 @@
         "play_duration": "播放长度",
         "stream": "视频流地址",
         "video_codec": "视频编码",
-        "o_count": "高潮次数",
         "md5": "MD5 校验值",
         "oshash": "oshash值",
         "oshash_meaning": "OpenSubtitles 哈希值",
@@ -1384,13 +1378,10 @@
             "where_can_stash_store_its_database_warning": "警告：<strong>不支持</strong>将数据库存储在运行 Stash 的不同系统上（例如，在另一台计算机上运行 Stash 服务器时将数据库存储到 NAS 上）！SQLite 不适合在网络上使用，尝试这样做很容易导致整个数据库损坏。",
             "where_can_stash_store_its_generated_content": "哪里可以存放Stash产生的资料？",
             "where_can_stash_store_its_generated_content_description": "为了可以提供缩图，预览和浏览图，Stash生成图片和视频。同时也包括将不支持的文件转码后的视频。默认情况下，Stash会建立一个<code>generated</code>文件夹在含有你配置文件的目录中。如果你要修改生成媒体的地方，请输入一个绝对，或者相对(对于当前工作目录)的路径。如果此目录不存在，Stash会自动建立它。",
-            "where_is_your_porn_located": "你的内容存放在哪里？",
-            "where_is_your_porn_located_description": "添加含有你的视频和图片的目录。Stash会在扫描时使用这些目录去寻找视频和图片。",
+            "where_is_your_content_located": "你的内容存放在哪里？",
+            "where_is_your_content_located_description": "添加含有你的视频和图片的目录。Stash会在扫描时使用这些目录去寻找视频和图片。",
             "path_to_blobs_directory_empty_for_default": "blobs目录的路径（默认为空）",
-            "store_blobs_in_database": "将 blobs存储到数据库",
-            "sfw_content_settings": "为了SFW(工作场合安全)内容使用stash?",
-            "sfw_content_settings_description": "stash能被用来管理SFW(工作场合安全)内容，例如摄影、艺术、漫画等。启用此选项将调整部分界面行为，使其更适合SFW内容。",
-            "use_sfw_content_mode": "使用SFW(工作场合安全)模式"
+            "store_blobs_in_database": "将 blobs存储到数据库"
         },
         "stash_setup_wizard": "Stash 设定向导",
         "success": {
@@ -1444,7 +1435,6 @@
         "total_play_count": "总播放次数",
         "total_play_duration": "总播放时长",
         "scenes_played": "已播放的短片",
-        "total_o_count": "高潮总计",
         "total_o_count_sfw": "总点赞数"
     },
     "status": "状态：{statusText}",
@@ -1585,17 +1575,13 @@
     "unknown_date": "未知日期",
     "playdate_recorded_no": "没有播放日期记录",
     "play_history": "播放历史",
-    "odate_recorded_no": "无已记录的高潮日期",
-    "o_history": "高潮记录",
     "history": "历史记录",
     "index_of_total": "第{index}项，共 {total}项",
     "time": "时间",
-    "last_o_at": "最近一次高潮在",
     "connection_monitor": {
         "websocket_connection_reestablished": "Websocket连接已重新建立",
         "websocket_connection_failed": "无法建立websocket连接：有关详细信息，请参阅浏览器控制台"
     },
-    "o_count": "高潮次数",
     "studio_tags": "工作室标签",
     "studio_count": "工作室计数",
     "group": "集合",

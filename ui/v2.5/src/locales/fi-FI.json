@@ -764,9 +764,6 @@
                     "heading": "Näytä kaikki tiedot"
                 }
             },
-            "sfw_mode": {
-                "heading": "SFW -sisältötila"
-            },
             "performer_list": {
                 "heading": "Esiintyjälista"
             }
@@ -1144,8 +1141,8 @@
             "where_can_stash_store_its_database": "Mihin Stash voi tallentaa tietokantansa?",
             "where_can_stash_store_its_database_description": "Stash käyttää SQLite -tietokantaa sisällön metadatan tallennukseen. Oletuksena <code>stash-go.sqlite</code> luodaan samaan kansioon konfiguraatiotiedoston kanssa. Jos haluat muuttaa tätä, anna absoluuttinen tai relatiivinen tiedostonimi.",
             "where_can_stash_store_its_generated_content": "Mihin Stash voi tallentaa generoimansa sisällön?",
-            "where_is_your_porn_located": "Missä sisältösi on?",
-            "where_is_your_porn_located_description": "Lisää hakemistoja joissa videot ja kuvat sijaitsevat. Stash käyttää näitä hakemistoja etsiessään videoita ja kuvia."
+            "where_is_your_content_located": "Missä sisältösi on?",
+            "where_is_your_content_located_description": "Lisää hakemistoja joissa videot ja kuvat sijaitsevat. Stash käyttää näitä hakemistoja etsiessään videoita ja kuvia."
         },
         "stash_setup_wizard": "Stashin asetusvelho",
         "success": {
@@ -1183,7 +1180,6 @@
         "scenes_size": "Kohtausten koko",
         "scenes_played": "Toistetut kohtaukset",
         "total_play_duration": "Toiston kokonaiskesto",
-        "total_o_count": "O-luku yhteensä",
         "total_play_count": "Toistomäärä yhteensä"
     },
     "status": "Tila: {statusText}",

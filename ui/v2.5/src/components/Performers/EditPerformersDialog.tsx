@@ -26,8 +26,6 @@ import { IndeterminateCheckbox } from "../Shared/IndeterminateCheckbox";
 import { BulkUpdateFormGroup, BulkUpdateTextInput } from "../Shared/BulkUpdate";
 import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 import { CountrySelect } from "../Shared/CountrySelect";
-import { useConfigurationContext } from "src/hooks/Config";
-import cx from "classnames";
 import { BulkUpdateDateInput } from "../Shared/DateInput";
 import { getDateError } from "src/utils/yup";
 
@@ -65,9 +63,6 @@ export const EditPerformersDialog: React.FC<IListOperationProps> = (
 ) => {
   const intl = useIntl();
   const Toast = useToast();
-
-  const { configuration } = useConfigurationContext();
-  const { sfwContentMode } = configuration.interface;
 
   const [tagIds, setTagIds] = useState<GQL.BulkUpdateIds>({
     mode: GQL.BulkUpdateIdMode.Add,
@@ -232,13 +227,9 @@ export const EditPerformersDialog: React.FC<IListOperationProps> = (
   }, [props.selected]);
 
   function render() {
-    // sfw class needs to be set because it is outside body
-
     return (
       <ModalComponent
-        dialogClassName={cx("edit-performers-dialog", {
-          "sfw-content-mode": sfwContentMode,
-        })}
+        dialogClassName="edit-performers-dialog"
         show
         icon={faPencilAlt}
         header={intl.formatMessage(

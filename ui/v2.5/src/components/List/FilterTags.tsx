@@ -21,7 +21,6 @@ import { BsPrefixProps, ReplaceProps } from "react-bootstrap/esm/helpers";
 import { CustomFieldsCriterion } from "src/models/list-filter/criteria/custom-fields";
 import { useDebounce } from "src/hooks/debounce";
 import cx from "classnames";
-import { useConfigurationContext } from "src/hooks/Config";
 import { PatchContainerComponent } from "src/patch";
 import { View } from "./views";
 
@@ -156,9 +155,6 @@ export const FilterTags: React.FC<IFilterTagsProps> = ({
 }) => {
   const intl = useIntl();
   const ref = useRef<HTMLDivElement>(null);
-
-  const { configuration } = useConfigurationContext();
-  const { sfwContentMode } = configuration.interface;
 
   const [cutoff, setCutoff] = React.useState<number | undefined>();
   const elementGap = 10; // Adjust this value based on your CSS gap or margin
@@ -307,7 +303,7 @@ export const FilterTags: React.FC<IFilterTagsProps> = ({
     return (
       <FilterTag
         key={criterion.getId()}
-        label={criterion.getLabel(intl, sfwContentMode)}
+        label={criterion.getLabel(intl)}
         unsupported={unsupported}
         onClick={() => onClickCriterionTag(criterion)}
         onRemove={($event) => onRemoveCriterionTag(criterion, $event)}

@@ -25,7 +25,6 @@ import {
   SceneMarkerLink,
   TagLink,
 } from "../Shared/TagLink";
-import { SweatDrops } from "../Shared/SweatDrops";
 import { Pagination } from "src/components/List/Pagination";
 import TextUtils from "src/utils/text";
 import { DeleteScenesDialog } from "src/components/Scenes/DeleteScenesDialog";
@@ -40,6 +39,7 @@ import {
   faMapMarkerAlt,
   faPencilAlt,
   faTag,
+  faThumbsUp,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { SceneMergeModal } from "../Scenes/SceneMergeDialog";
@@ -496,7 +496,7 @@ export const SceneDuplicateChecker: React.FC = () => {
         <div>
           <Button className="minimal">
             <span className="fa-icon">
-              <SweatDrops />
+              <Icon icon={faThumbsUp} />
             </span>
             <span>{scene.o_counter}</span>
           </Button>

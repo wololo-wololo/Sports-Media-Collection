@@ -8,13 +8,12 @@ import (
 	"io/fs"
 )
 
-//go:embed performer performer_male performer_sfw scene image gallery tag studio group
+//go:embed performer scene image gallery tag studio group
 var data embed.FS
 
 const (
-	Performer                = "performer"
-	PerformerMale            = "performer_male"
-	DefaultSFWPerformerImage = "performer_sfw/performer.svg"
+	Performer             = "performer"
+	DefaultPerformerImage = "performer/performer.svg"
 
 	Scene             = "scene"
 	DefaultSceneImage = "scene/scene.svg"

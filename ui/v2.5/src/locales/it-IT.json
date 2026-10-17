@@ -847,7 +847,6 @@
         "set_image_url_title": "URL Immagine",
         "unsaved_changes": "Modifiche non salvate. Sei sicuro di voler lasciare la pagina?",
         "clear_play_history_confirm": "Sei sicuro/a di voler resettare la cronologia delle riproduzioni?",
-        "clear_o_history_confirm": "Sei sicuro/a di voler resettare la cronologia di O?",
         "imagewall": {
             "direction": {
                 "column": "Colonna"
@@ -1113,8 +1112,8 @@
             "where_can_stash_store_its_database_description": "Stash usa un database sqlite per salvare i metadata dei tuoi porno. In modo predefinito, questo sarà creato come <code>stash-go.sqlite</code> nella cartella che contiene il tuo file di configurazione. Se volete cambiare, per favore inserite un nome file assoluto o relativo (all'attuale cartella di lavoro).",
             "where_can_stash_store_its_generated_content": "Dove può Stash salvare il suo contenuto creato?",
             "where_can_stash_store_its_generated_content_description": "Per fornire i thumbnails, anteprime e sprite, Stash crea immagini e video. Questo inoltre include le transcodifiche per i formato file non supportati. In modo predefinito, Stash creerà una cartella <code>generated</code> dentro la cartella contenente il tuo file di configurazione. Se volete cambiare questa locazione, per favore inserite un percorso assoluto o relativo (all'attuale cartella di lavoro). Stash creerà questa cartella se non esiste già.",
-            "where_is_your_porn_located": "Dove si trova il tuo porno?",
-            "where_is_your_porn_located_description": "Aggiungete cartelle che contengono i vostri video e immagini porno. Stash userà queste cartelle per trovare video e immagini durante la scansione."
+            "where_is_your_content_located": "Dove si trova il tuo porno?",
+            "where_is_your_content_located_description": "Aggiungete cartelle che contengono i vostri video e immagini porno. Stash userà queste cartelle per trovare video e immagini durante la scansione."
         },
         "stash_setup_wizard": "Procedura Guidata Stash",
         "success": {

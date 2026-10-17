@@ -836,9 +836,6 @@
                     }
                 }
             },
-            "sfw_mode": {
-                "heading": "Tryb treści SFW"
-            },
             "troubleshooting_mode": {
                 "button": "Tryb rozwiązywania problemów",
                 "dialog_title": "Włącz tryb rozwiązywania problemów",
@@ -1003,7 +1000,6 @@
         "scrape_results_scraped": "Zebrany",
         "set_image_url_title": "Adres URL obrazu",
         "unsaved_changes": "Niezapisane zmiany. Czy na pewno chcesz wyjść?",
-        "clear_o_history_confirm": "Czy na pewno chcesz wyczyścić historię O?",
         "clear_play_history_confirm": "Czy na pewno chcesz wyczyścić historię odtwarzania?",
         "overwrite_filter_warning": "Zapisany filtr \"{entityName}\" zostanie zastąpiony.",
         "studios_found": "Znalezione studia: {count}",
@@ -1174,8 +1170,7 @@
         "play_count": "Liczba odtworzeń",
         "play_duration": "Czas odtwarzania",
         "stream": "Stream",
-        "video_codec": "Kodek wideo",
-        "o_count": "Licznik O"
+        "video_codec": "Kodek wideo"
     },
     "megabits_per_second": "{value} megabitów na sekundę",
     "metadata": "Metadane",
@@ -1326,13 +1321,10 @@
             "where_can_stash_store_its_database_warning": "UWAGA: przechowywanie bazy danych w innym systemie niż ten, z którego uruchamiany jest Stash (np. przechowywanie bazy danych na dysku NAS przy jednoczesnym uruchomieniu serwera Stash na innym komputerze) jest <strong>nieobsługiwane</strong>! SQLite nie jest przeznaczony do pracy w sieci, a próba takiego działania może bardzo łatwo spowodować uszkodzenie całej bazy danych.",
             "where_can_stash_store_its_generated_content": "Gdzie Stash może przechowywać wygenerowaną zawartość?",
             "where_can_stash_store_its_generated_content_description": "Aby zapewnić miniatury, podglądy i sprite'y, Stash generuje obrazy i wideo. Obejmuje to również transkodowanie dla nieobsługiwanych formatów plików. Domyślnie Stash tworzy katalog <code>generated</code> w katalogu zawierającym plik konfiguracyjny. Jeśli chcesz zmienić miejsce przechowywania wygenerowanych multimediów, podaj ścieżkę bezwzględną lub względną (do bieżącego katalogu roboczego). Stash utworzy ten katalog, jeśli jeszcze nie istnieje.",
-            "where_is_your_porn_located": "Gdzie znajduje się Twoja zawartość?",
-            "where_is_your_porn_located_description": "Dodaj katalogi zawierające filmy i obrazy. Stash będzie używał tych katalogów do wyszukiwania filmów i obrazów podczas skanowania..",
+            "where_is_your_content_located": "Gdzie znajduje się Twoja zawartość?",
+            "where_is_your_content_located_description": "Dodaj katalogi zawierające filmy i obrazy. Stash będzie używał tych katalogów do wyszukiwania filmów i obrazów podczas skanowania..",
             "path_to_blobs_directory_empty_for_default": "ścieżka do katalogu blobs (domyślnie pusta)",
-            "sfw_content_settings": "Korzystasz ze stash do treści SFW?",
-            "sfw_content_settings_description": "Stash może być używany do zarządzania treściami SFW, takimi jak fotografia, sztuka, komiksy i inne. Włączenie tej opcji dostosuje niektóre elementy interfejsu, aby były bardziej odpowiednie dla treści SFW.",
-            "store_blobs_in_database": "Przechowuj bloby w bazie danych",
-            "use_sfw_content_mode": "Użyj trybu treści SFW"
+            "store_blobs_in_database": "Przechowuj bloby w bazie danych"
         },
         "stash_setup_wizard": "Kreator konfiguracji Stash",
         "success": {
@@ -1384,7 +1376,6 @@
         "scenes_duration": "Czas trwania scen",
         "scenes_size": "Rozmiar scen",
         "scenes_played": "Odtworzone sceny",
-        "total_o_count": "Łączna ilość O",
         "total_o_count_sfw": "Łączna ilość polubień",
         "total_play_count": "Łączna liczba odtworzeń",
         "total_play_duration": "Łączny czas odtwarzania"
@@ -1459,7 +1450,6 @@
     "include_sub_group_content": "Uwzględnij zawartość podgrupy",
     "include_sub_groups": "Uwzględnij podgrupy",
     "index_of_total": "{index} z {total}",
-    "last_o_at": "Ostatnie O",
     "login": {
         "login": "Logowanie",
         "username": "Użytkownik",
@@ -1467,11 +1457,8 @@
         "invalid_credentials": "Nieprawidłowa nazwa użytkownika lub hasło",
         "internal_error": "Nieoczekiwany błąd wewnętrzny. Szczegóły znajdziesz w logach"
     },
-    "o_count": "Licznik O",
     "o_count_sfw": "Polubienia",
-    "o_history": "Historia O",
     "o_history_sfw": "Historia polubień",
-    "odate_recorded_no": "Nie zarejestrowano O",
     "orientation": "Orientacja",
     "package_manager": {
         "add_source": "Dodaj źródło",

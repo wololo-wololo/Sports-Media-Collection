@@ -1089,8 +1089,8 @@
             "where_can_stash_store_its_database_description": "Stash gebruikt een sqlite-database om je porno-metadata op te slaan. Standaard wordt dit aangemaakt als <code>stash-go.sqlite</code> in de map die je configuratiebestand bevat. Als u dit wilt wijzigen, voert u een absolute of relatieve (ten opzichte van de huidige werkdirectory) bestandsnaam in.",
             "where_can_stash_store_its_generated_content": "Waar kan Stash de gegenereerde inhoud opslaan?",
             "where_can_stash_store_its_generated_content_description": "Om thumbnails, previews en sprites aan te bieden, genereert Stash afbeeldingen en video's. Dit omvat ook transcodes voor niet-ondersteunde bestandsindelingen. Standaard zal Stash een <code>generated</code> directory aanmaken in de directory die uw configuratiebestand bevat. Als u wilt wijzigen waar deze gegenereerde media wordt opgeslagen, voert u een absoluut of relatief (ten opzichte van de huidige werkmap) pad in. Stash maakt deze map aan als deze nog niet bestaat.",
-            "where_is_your_porn_located": "Waar staat je porno?",
-            "where_is_your_porn_located_description": "Voeg mappen toe die uw video's en afbeeldingen bevatten. Stash gebruikt deze mappen om video's en afbeeldingen te vinden tijdens het scannen."
+            "where_is_your_content_located": "Waar staat je porno?",
+            "where_is_your_content_located_description": "Voeg mappen toe die uw video's en afbeeldingen bevatten. Stash gebruikt deze mappen om video's en afbeeldingen te vinden tijdens het scannen."
         },
         "stash_setup_wizard": "Stash-installatiewizard",
         "success": {

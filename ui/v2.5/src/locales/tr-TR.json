@@ -908,7 +908,6 @@
             "empty_results": "Hedef alan değerleri değişmeyecektir."
         },
         "dont_show_until_updated": "Sonraki güncellemeye kadar gösterme",
-        "clear_o_history_confirm": "O geçmişini temizlemek istediğinize emin misiniz?",
         "imagewall": {
             "direction": {
                 "description": "Sütun veya satır tabanlı düzen.",
@@ -1034,8 +1033,7 @@
         "stream": "Yayınla",
         "video_codec": "Video Kodlayıcı",
         "play_duration": "Oynatma Süresi",
-        "play_count": "Oynatma Sayısı",
-        "o_count": "O Sayısı"
+        "play_count": "Oynatma Sayısı"
     },
     "megabits_per_second": "{value} mbps",
     "metadata": "Üst Veri",
@@ -1132,8 +1130,8 @@
             "where_can_stash_store_its_database_description": "Stash porno arşiviniz için SQLite veritabanı kullanır. Bu veritabanı, varsayılan olarak <code>stash-go.sqlite</code> dizininde, yapılandırma dosyasıyla aynı yerde oluşturulur. Bu dizini değiştirmek isterseniz, yapılandırma dosyasının bulunduğu dizinin tam konumunu girin.",
             "where_can_stash_store_its_generated_content": "Stash için oluşturulan ek dosyalar nereye kaydedilsin?",
             "where_can_stash_store_its_generated_content_description": "Stash, önizlemeler için küçük hareketli resimler ve videolar oluşturur. Ayrıca web tarayıcınızın desteklemediği video dosyaları için dönüştürülmüş video dosyaları da oluşturulur. Bu amaçla, varsayılan olarak yapılandırma dosyasının bulunduğu <code>generated</code> dizini kullanılır. Bu dizini değiştirmek isterseniz, yapılandırma dosyasının bulunduğu dizinin tam konumunu girin. Eğer dizin bulunamazsa otomatik olarak oluşturulacaktır.",
-            "where_is_your_porn_located": "Porno koleksiyonunuz hangi dizinde?",
-            "where_is_your_porn_located_description": "Fotoğraf ve videoların bulunduğu dizinleri ekleyin. Stash, tarama sırasında bu dizinleri kullanacaktır.",
+            "where_is_your_content_located": "Porno koleksiyonunuz hangi dizinde?",
+            "where_is_your_content_located_description": "Fotoğraf ve videoların bulunduğu dizinleri ekleyin. Stash, tarama sırasında bu dizinleri kullanacaktır.",
             "where_can_stash_store_blobs": "Stash veritabanı ikili verilerini nerede saklayabilir?",
             "where_can_stash_store_cache_files": "Stash önbellek dosyalarını nerede saklayabilir?",
             "path_to_cache_directory_empty_for_default": "önbellek dizini yolu (varsayılan için boş bırakın)",
@@ -1182,8 +1180,7 @@
         "scenes_size": "Toplam sahne boyutu",
         "total_play_count": "Toplam Oynatma Sayısı",
         "total_play_duration": "Toplam Oynatma Süresi",
-        "scenes_played": "Oynatılan Sahneler",
-        "total_o_count": "Toplam O Sayısı"
+        "scenes_played": "Oynatılan Sahneler"
     },
     "status": "Durum: {statusText}",
     "studio": "Stüdyo",
@@ -1397,8 +1394,6 @@
         "uploading": "Komut dosyası yükleniyor",
         "syncing": "Sunucu ile senkronize ediliyor"
     },
-    "o_count": "O Sayısı",
-    "o_history": "O Geçmişi",
     "parent_studio": "Ana Stüdyo",
     "perceptual_similarity": "Algısal Benzerlik (pHash)",
     "recently_released_objects": "Yeni Çıkan {objects}",
@@ -1453,7 +1448,6 @@
     "duplicated_phash": "Yinelenen (pHash)",
     "captions": "Alt yazılar",
     "containing_group_count": "İçerdiği Grup Sayısı",
-    "last_o_at": "Son O Tarihi",
     "sub_group_of": "{parent} öğesinin alt grubu",
     "time_end": "Bitiş Zamanı",
     "custom_fields": {

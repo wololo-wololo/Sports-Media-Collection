@@ -4,8 +4,6 @@ import { Button, ButtonGroup, Dropdown, DropdownButton } from "react-bootstrap";
 import { useIntl } from "react-intl";
 import { Icon } from "src/components/Shared/Icon";
 import { LoadingIndicator } from "src/components/Shared/LoadingIndicator";
-import { SweatDrops } from "src/components/Shared/SweatDrops";
-import { useConfigurationContext } from "src/hooks/Config";
 
 export interface IOCounterButtonProps {
   value: number;
@@ -18,11 +16,8 @@ export const OCounterButton: React.FC<IOCounterButtonProps> = (
   props: IOCounterButtonProps
 ) => {
   const intl = useIntl();
-  const { configuration } = useConfigurationContext();
-  const { sfwContentMode } = configuration.interface;
-
-  const icon = !sfwContentMode ? <SweatDrops /> : <Icon icon={faThumbsUp} />;
-  const messageID = !sfwContentMode ? "o_count" : "o_count_sfw";
+  const icon = <Icon icon={faThumbsUp} />;
+  const messageID = "o_count_sfw";
 
   const [loading, setLoading] = useState(false);
 

@@ -571,7 +571,7 @@
             "config_path": "A Stash a következő konfigurációs fájl útvonalat fogja használni: <code>{path}</code>"
         },
         "paths": {
-            "where_is_your_porn_located": "Hol található a pornód?"
+            "where_is_your_content_located": "Hol található a pornód?"
         }
     },
     "stashbox": {

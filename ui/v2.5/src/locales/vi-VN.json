@@ -844,7 +844,6 @@
                 "zoom": "Phóng"
             }
         },
-        "clear_o_history_confirm": "Bạn có chắc chắn muốn xóa lịch sử O không?",
         "clear_play_history_confirm": "Bạn có chắc muốn xóa lịch sử phát không?",
         "create_new_entity": "Tạo mới {entity}",
         "delete_entity_simple_desc": "{count, plural, one {Bạn có chắc chắn muốn xóa {singularEntity} này không?} other {Bạn có chắc chắn muốn xóa {pluralEntity} này không?}}",

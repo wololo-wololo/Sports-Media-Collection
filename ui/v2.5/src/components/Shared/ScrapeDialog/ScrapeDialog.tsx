@@ -3,7 +3,6 @@ import { Form, Col, Row } from "react-bootstrap";
 import { ModalComponent } from "../Modal";
 import { FormattedMessage, useIntl } from "react-intl";
 import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
-import { useConfigurationContext } from "src/hooks/Config";
 
 export interface IScrapeDialogContextState {
   existingLabel?: React.ReactNode;
@@ -25,8 +24,6 @@ export const ScrapeDialog: React.FC<
   React.PropsWithChildren<IScrapeDialogProps>
 > = (props: React.PropsWithChildren<IScrapeDialogProps>) => {
   const intl = useIntl();
-  const { configuration } = useConfigurationContext();
-  const { sfwContentMode } = configuration.interface;
 
   const existingLabel = useMemo(
     () =>
@@ -69,9 +66,7 @@ export const ScrapeDialog: React.FC<
       }}
       modalProps={{
         size: "lg",
-        dialogClassName: `${props.className ?? ""} scrape-dialog ${
-          sfwContentMode ? "sfw-mode" : ""
-        }`,
+        dialogClassName: `${props.className ?? ""} scrape-dialog`,
       }}
     >
       <div className="dialog-container">

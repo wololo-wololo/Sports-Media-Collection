@@ -959,7 +959,6 @@
             },
             "margin_desc": "每個完整影像周圍的邊界像素數目。"
         },
-        "clear_o_history_confirm": "您確定要清除尻尻紀錄嗎？",
         "clear_play_history_confirm": "您確定要清除播放紀錄嗎？",
         "performers_found": "找到{count} 個演員",
         "set_default_filter_confirm": "是否確定設定這一個過濾條件為預設?",
@@ -1108,8 +1107,7 @@
         "play_count": "播放次數",
         "play_duration": "播放長度",
         "stream": "串流連結",
-        "video_codec": "影片編碼",
-        "o_count": "O 計數"
+        "video_codec": "影片編碼"
     },
     "megabits_per_second": "{value} megabits/秒",
     "metadata": "Metadata",
@@ -1248,8 +1246,8 @@
             "where_can_stash_store_its_database_description": "Stash 使用 SQLite 資料庫來儲存您內容的資料。預設情況下，Stash 將在您的設定檔路徑下以 <code>stash-go.sqlite</code> 這個檔案來儲存此資料庫內容。如果您想要更改此設定，請在此輸入您所想要的絕對或相對路徑（相對於目前工作目錄）。",
             "where_can_stash_store_its_generated_content": "Stash 可以在哪裡儲存其生成內容？",
             "where_can_stash_store_its_generated_content_description": "為提供縮圖、預覽和其他預覽資料，Stash 將自動生成圖片和影片資訊。這包括不支援的檔案格式之轉檔。預設情況下，Stash 將在包含您設定檔案的資料夾中建立一個新的 <code>generated</code> 資料夾。如果要更改此生成媒體的儲存位置，請在此輸入絕對或相對路徑（相對於目前工作目錄）。如果該資料夾不存在，Stash 將自動建立此目錄。",
-            "where_is_your_porn_located": "你的內容都藏哪？",
-            "where_is_your_porn_located_description": "在此選擇你視訊及圖片的資料夾，Stash 將在掃描影片及圖片時使用這些路徑。",
+            "where_is_your_content_located": "你的內容都藏哪？",
+            "where_is_your_content_located_description": "在此選擇你視訊及圖片的資料夾，Stash 將在掃描影片及圖片時使用這些路徑。",
             "path_to_blobs_directory_empty_for_default": "blobs 目錄的路徑 (預設為空)",
             "path_to_cache_directory_empty_for_default": "快取目錄的路徑 (預設為空)",
             "store_blobs_in_database": "將 blobs 儲存到資料庫",
@@ -1310,7 +1308,6 @@
         "scenes_duration": "短片長度",
         "scenes_size": "短片大小",
         "scenes_played": "已播放的短片",
-        "total_o_count": "總O計數",
         "total_play_count": "總播放數",
         "total_play_duration": "總播放時長"
     },
@@ -1396,7 +1393,6 @@
     "history": "歷史紀錄",
     "image_index": "圖片#",
     "index_of_total": "第{index}個，共 {total}個",
-    "last_o_at": "最後 O 在",
     "package_manager": {
         "source": {
             "name": "名稱",
@@ -1467,9 +1463,6 @@
     },
     "include_sub_studio_content": "包括子工作室內容",
     "include_sub_tag_content": "包含子標籤內容",
-    "o_count": "O 計數",
-    "o_history": "o 歷史記錄",
-    "odate_recorded_no": "無O記錄日期",
     "orientation": "方向",
     "parent_studio": "母工作室",
     "penis": "陰莖",

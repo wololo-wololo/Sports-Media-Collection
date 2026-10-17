@@ -40,11 +40,11 @@ const sortByOptions = [
       value: "scenes_count",
     },
     {
-      messageID: "o_count",
+      messageID: "o_count_sfw",
       value: "o_counter",
     },
     {
-      messageID: "o_count_all",
+      messageID: "o_count_all_sfw",
       value: "o_counter_all",
     },
     {

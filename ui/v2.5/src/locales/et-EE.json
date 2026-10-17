@@ -858,10 +858,6 @@
                     }
                 }
             },
-            "sfw_mode": {
-                "description": "Luba, kui kasutad stashi SFW sisu jaoks. Peidab või muudab kasutajaliidese mõningaid täiskasvanutele mõeldud sisuga seotud aspekte.",
-                "heading": "SFW režiim"
-            },
             "custom_title": {
                 "description": "Kohandatav tekst mis lisatakse lehe tiitlile. Kui tühi, siis on vaikimisi \"Stash\".",
                 "heading": "Kohandatud tiitel"
@@ -1042,7 +1038,6 @@
         "set_image_url_title": "Pildi URL",
         "unsaved_changes": "Salvestamata muudatused. Kas soovid kindlasti lahkuda?",
         "performers_found": "Leiti {count} esinejat",
-        "clear_o_history_confirm": "Kas oled kindel, et soovid puhastada O ajaloo?",
         "clear_play_history_confirm": "Kas oled kindel, et soovid puhastada vaatamise ajaloo?",
         "set_default_filter_confirm": "Kas oled kindel, et soovid määrata seda filtrit vaikimisi valikuks?",
         "overwrite_filter_warning": "Salvestatud filter \"{entityName}\" kirjutatakse üle.",
@@ -1214,7 +1209,6 @@
         "play_duration": "Esitamisaeg",
         "stream": "Striim",
         "video_codec": "Video Koodek",
-        "o_count": "O Arv",
         "oshash": "oshash",
         "oshash_meaning": "OpenSubtitles'i Räsi",
         "phash_meaning": "Tajutav Räsi",
@@ -1366,13 +1360,10 @@
             "where_can_stash_store_its_database_warning": "HOIATUS: hoides andmebaasi erineval süsteemil kui millel Stash jookseb (nt hoides andmebaasi NASil kui Stash jookseb teisel arvutil) on <strong>mitte toetatud</strong>! SQLite ei ole mõeldud kasutamiseks üle võrgu ja selle proovimine võib väga kergesti viia andmebaasi korrupeerumiseni.",
             "where_can_stash_store_its_generated_content": "Kus saab Stash oma genereeritud sisu salvestada?",
             "where_can_stash_store_its_generated_content_description": "Pisipiltide, eelvaadete ja spraitide pakkumiseks loob Stash pilte ja videoid. See hõlmab ka toetamata failivormingute ümbertöötlemist. Vaikimisi loob Stash konfiguratsioonifaili sisaldavas kaustas <code>genereeritud</code> kausta. Kui soovid muuta seda, kus see loodud meedium salvestatakse, sisesta absoluutne või suhteline failitee (praeguse töökataloogi suhtes). Stash loob selle kausta, kui seda veel pole.",
-            "where_is_your_porn_located": "Kus su sisu asub?",
-            "where_is_your_porn_located_description": "Lisage oma videoid ja pilte sisaldavad kataloogid. Stash kasutab neid katalooge skanimise ajal videote ja piltide otsimiseks.",
+            "where_is_your_content_located": "Kus su sisu asub?",
+            "where_is_your_content_located_description": "Lisage oma videoid ja pilte sisaldavad kataloogid. Stash kasutab neid katalooge skanimise ajal videote ja piltide otsimiseks.",
             "path_to_blobs_directory_empty_for_default": "blobsi kataloogi tee (vaikimisi tühi)",
-            "store_blobs_in_database": "Salvesta blobid andmebaasi",
-            "sfw_content_settings": "Kasutad stashi SFW sisu jaoks?",
-            "sfw_content_settings_description": "stashi saab kasutada SFW-sisu, näiteks fotograafia, kunsti, koomiksite ja muu haldamiseks. Selle valiku lubamine muudab kasutajaliidese käitumist SFW-sisu jaoks sobivamaks.",
-            "use_sfw_content_mode": "Kasuta SFW sisu režiimi"
+            "store_blobs_in_database": "Salvesta blobid andmebaasi"
         },
         "stash_setup_wizard": "Stashi Ülessättimise Viisard",
         "success": {
@@ -1424,7 +1415,6 @@
         "scenes_duration": "Stseenide pikkus",
         "scenes_size": "Stseenide suurus",
         "scenes_played": "Mängitud Stseenid",
-        "total_o_count": "Kokku O-Arv",
         "total_play_count": "Mängimiste Koguarv",
         "total_play_duration": "Mängimiste Kogukestus",
         "total_o_count_sfw": "Meeldimisi kokku"
@@ -1571,12 +1561,9 @@
     "tag_parent_tooltip": "Sellel on vanemamärked",
     "tag_sub_tag_tooltip": "Sellel on alammärked",
     "time": "Aeg",
-    "o_history": "O Ajalugu",
     "containing_group_count": "Sisalduvate Rühmade Arv",
     "containing_groups": "Sisalduvad Rühmad",
     "group": "Grupp",
-    "last_o_at": "Viimane O",
-    "odate_recorded_no": "O Kuupäevi Pole Salvestatud",
     "play_history": "Vaatamise Ajalugu",
     "playdate_recorded_no": "Vaatamise Kuupäevi Pole Salvestatud",
     "studio_count": "Stuudiote Arv",
@@ -1599,7 +1586,6 @@
     "sub_groups": "Alamgrupid",
     "include_sub_tag_content": "Sisalda alamsiltide sisu",
     "include_sub_studio_content": "Sisalda alamstuudiote sisu",
-    "o_count": "O Arv",
     "include_sub_groups": "Sisalda alam-gruppe",
     "time_end": "Lõpuaeg",
     "criterion_modifier_values": {

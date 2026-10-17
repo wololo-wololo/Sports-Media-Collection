@@ -241,14 +241,6 @@ export const SettingsInterfacePanel: React.FC = PatchComponent(
             <option value="zh-CN">简体中文 (中国)</option>
           </SelectSetting>
 
-          <BooleanSetting
-            id="sfw-content-mode"
-            headingID="config.ui.sfw_mode.heading"
-            subHeadingID="config.ui.sfw_mode.description"
-            checked={iface.sfwContentMode ?? undefined}
-            onChange={(v) => saveInterface({ sfwContentMode: v })}
-          />
-
           <StringSetting
             id="custom-title"
             headingID="config.ui.custom_title.heading"
