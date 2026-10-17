@@ -78,6 +78,8 @@ type sceneRow struct {
 	Commentators zero.String `db:"commentators"`
 	SyncOffset   null.Float  `db:"sync_offset"`
 
+	ImportDismissed bool `db:"import_dismissed"`
+
 	// not used in resolutions or updates
 	CoverBlob zero.String `db:"cover_blob"`
 }
@@ -108,6 +110,7 @@ func (r *sceneRow) fromScene(o models.Scene) {
 	r.Completeness = enumToZeroString(o.Completeness)
 	r.Commentators = zero.StringFrom(o.Commentators)
 	r.SyncOffset = null.FloatFromPtr(o.SyncOffset)
+	r.ImportDismissed = o.ImportDismissed
 }
 
 func enumToZeroString[T ~string](v *T) zero.String {
@@ -166,6 +169,8 @@ func (r *sceneQueryRow) resolve() *models.Scene {
 		Completeness: zeroStringToEnum[models.Completeness](r.Completeness),
 		Commentators: r.Commentators.String,
 		SyncOffset:   r.SyncOffset.Ptr(),
+
+		ImportDismissed: r.ImportDismissed,
 	}
 
 	if r.PrimaryFileFolderPath.Valid && r.PrimaryFileBasename.Valid {
@@ -202,6 +207,7 @@ func (r *sceneRowRecord) fromPartial(o models.ScenePartial) {
 	r.setNullString("completeness", o.Completeness)
 	r.setNullString("commentators", o.Commentators)
 	r.setNullFloat64("sync_offset", o.SyncOffset)
+	r.setBool("import_dismissed", o.ImportDismissed)
 }
 
 type sceneRepositoryType struct {

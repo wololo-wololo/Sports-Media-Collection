@@ -372,6 +372,8 @@ input SceneFilterType {
   source: RecordingSourceCriterionInput
   completeness: CompletenessCriterionInput
   commentators: StringCriterionInput
+  "Filter by whether the recording was dismissed from the import review"
+  import_dismissed: Boolean
   "Filter by creation time"
   created_at: TimestampCriterionInput
   "Filter by last update time"

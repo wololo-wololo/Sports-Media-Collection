@@ -187,3 +187,83 @@ input SyncSeriesCalendarInput {
   "Seasons to sync; all seasons when omitted or empty"
   seasons: [Int!]
 }
+
+"How sure the import is about a suggested event"
+enum ImportConfidence {
+  "Event and session read from the name and confirmed by the calendar"
+  HIGH
+  "Event is clear, some values were guessed"
+  MEDIUM
+  "Several events fit; one has to be chosen"
+  LOW
+  "No event found"
+  NONE
+}
+
+"One suggested value, for display"
+type ImportField {
+  name: String!
+  value: String!
+  "Inferred rather than read from the name"
+  guessed: Boolean!
+  "filename, folder, rule or guess"
+  origin: String!
+}
+
+"What the import proposes for a recording"
+type ImportSuggestion {
+  scene: Scene!
+  path: String!
+  confidence: ImportConfidence!
+  series: Series
+  event: Event
+  session: EventSession
+  "Other events that fit, best first"
+  alternatives: [Event!]!
+  "Existing broadcaster"
+  studio: Studio
+  "Broadcaster name; created on accept when no studio exists"
+  broadcaster_name: String
+  language: String
+  feed_type: FeedType
+  feed_subject: String
+  source: RecordingSource
+  part: Int
+  fields: [ImportField!]!
+  notes: [String!]!
+}
+
+type FindImportSuggestionsResultType {
+  count: Int!
+  suggestions: [ImportSuggestion!]!
+}
+
+input ImportSuggestionsInput {
+  "Limit to these recordings; otherwise all recordings without an event"
+  scene_ids: [ID!]
+  "Include recordings dismissed from the review"
+  include_dismissed: Boolean
+  "1-based page, default 1"
+  page: Int
+  "Default 25, at most 200"
+  per_page: Int
+}
+
+input ImportAcceptInput {
+  scene_id: ID!
+  "Use this event instead of the suggested one"
+  event_id: ID
+}
+
+input ImportAcceptAllInput {
+  "Default HIGH"
+  min_confidence: ImportConfidence
+  "Limit to these recordings; otherwise all recordings without an event"
+  scene_ids: [ID!]
+}
+
+input ImportDismissInput {
+  scene_ids: [ID!]!
+  "false brings recordings back into the review"
+  dismissed: Boolean!
+}

@@ -44,6 +44,8 @@ type EventSessionReaderWriter interface {
 	FindMany(ctx context.Context, ids []int) ([]*EventSession, error)
 	// FindByEventID returns the sessions of an event in chronological order.
 	FindByEventID(ctx context.Context, eventID int) ([]*EventSession, error)
+	// All returns every session.
+	All(ctx context.Context) ([]*EventSession, error)
 
 	Create(ctx context.Context, newSession *EventSession) error
 	UpdatePartial(ctx context.Context, id int, partial EventSessionPartial) (*EventSession, error)

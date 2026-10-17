@@ -324,7 +324,7 @@ const (
 
 // slice default values
 var (
-	defaultVideoExtensions   = []string{"m4v", "mp4", "mov", "wmv", "avi", "mpg", "mpeg", "rmvb", "rm", "flv", "asf", "mkv", "webm", "f4v"}
+	defaultVideoExtensions   = []string{"m4v", "mp4", "mov", "wmv", "avi", "mpg", "mpeg", "rmvb", "rm", "flv", "asf", "mkv", "webm", "f4v", "ts", "m2ts", "mts"}
 	defaultImageExtensions   = []string{"png", "jpg", "jpeg", "gif", "webp", "avif", "jxl"}
 	defaultGalleryExtensions = []string{"zip", "cbz"}
 	defaultMenuItems         = []string{"scenes", "images", "groups", "markers", "galleries", "performers", "studios", "tags"}
@@ -910,6 +910,16 @@ func (i *Config) GetScraperUserAgent() string {
 // SportsCalendarURL overrides the Jolpica-F1 API address used to sync the
 // Formula 1 calendar, e.g. for a self-hosted mirror.
 const SportsCalendarURL = "sports_calendar_url"
+
+// SportsFilenamePatterns are naming templates, tried before the built-in
+// recognition when importing recordings, e.g.
+// "{series}.{year}.R{round}.{event}.{session}.{broadcaster}".
+const SportsFilenamePatterns = "sports_filename_patterns"
+
+// GetSportsFilenamePatterns returns the configured naming templates.
+func (i *Config) GetSportsFilenamePatterns() []string {
+	return i.getStringSlice(SportsFilenamePatterns)
+}
 
 // GetSportsCalendarURL returns the configured calendar API address, or an
 // empty string for the default.

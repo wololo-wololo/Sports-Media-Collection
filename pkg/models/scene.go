@@ -133,6 +133,8 @@ type SceneFilterType struct {
 	Source       *RecordingSourceCriterionInput `json:"source"`
 	Completeness *CompletenessCriterionInput    `json:"completeness"`
 	Commentators *StringCriterionInput          `json:"commentators"`
+	// Filter by whether the recording was dismissed from the import review
+	ImportDismissed *bool `json:"import_dismissed"`
 	// Filter by related galleries that meet this criteria
 	GalleriesFilter *GalleryFilterType `json:"galleries_filter"`
 	// Filter by related performers that meet this criteria

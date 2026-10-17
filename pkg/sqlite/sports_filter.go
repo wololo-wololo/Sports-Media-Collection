@@ -129,6 +129,7 @@ func sceneSportsCriterionHandlers(sceneFilter *models.SceneFilterType) compoundH
 		stringCriterionHandler(sceneFilter.Language, "scenes.language"),
 		stringCriterionHandler(sceneFilter.FeedSubject, "scenes.feed_subject"),
 		stringCriterionHandler(sceneFilter.Commentators, "scenes.commentators"),
+		boolCriterionHandler(sceneFilter.ImportDismissed, "scenes.import_dismissed", nil),
 	}
 
 	if c := sceneFilter.SessionType; c != nil {

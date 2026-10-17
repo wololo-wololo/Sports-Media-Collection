@@ -94,6 +94,8 @@ type Scene {
   commentators: String
   "Seconds into the recording at which the session's reference moment occurs"
   sync_offset: Float
+  "Hidden from the import review list"
+  import_dismissed: Boolean!
 
   custom_fields: Map!
 

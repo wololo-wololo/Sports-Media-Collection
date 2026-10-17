@@ -52,6 +52,8 @@ type Scene struct {
 	// SyncOffset is the position in seconds at which the session's reference
 	// moment (such as lights out) occurs, used to switch between feeds.
 	SyncOffset *float64 `json:"sync_offset"`
+	// ImportDismissed hides the recording from the import review list.
+	ImportDismissed bool `json:"import_dismissed"`
 
 	URLs         RelatedStrings  `json:"urls"`
 	GalleryIDs   RelatedIDs      `json:"gallery_ids"`
@@ -110,6 +112,8 @@ type ScenePartial struct {
 	Completeness OptionalString
 	Commentators OptionalString
 	SyncOffset   OptionalFloat64
+
+	ImportDismissed OptionalBool
 
 	URLs          *UpdateStrings
 	GalleryIDs    *UpdateIDs

@@ -571,6 +571,10 @@ var sessionTypeOrder = func() string {
 	return ret + fmt.Sprintf(" ELSE %d END", len(models.AllSessionType))
 }()
 
+func (qb *EventSessionStore) All(ctx context.Context) ([]*models.EventSession, error) {
+	return qb.getMany(ctx, qb.selectDataset().Order(goqu.I("event_sessions.id").Asc()))
+}
+
 func (qb *EventSessionStore) FindByEventID(ctx context.Context, eventID int) ([]*models.EventSession, error) {
 	q := qb.selectDataset().Where(qb.table().Col("event_id").Eq(eventID)).Order(
 		goqu.L("event_sessions.start_time IS NULL").Asc(),

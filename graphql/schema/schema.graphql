@@ -8,6 +8,8 @@ type Query {
   findEvents(series_id: ID, season: Int): [Event!]!
   findEvent(id: ID!): Event
   findEventSession(id: ID!): EventSession
+  "Suggested calendar links for recordings, read from file and folder names"
+  sportsImportSuggestions(input: ImportSuggestionsInput): FindImportSuggestionsResultType!
 
   # Filters
   findSavedFilter(id: ID!): SavedFilter
@@ -398,6 +400,16 @@ type Mutation {
   background job, creating the series if needed. Returns the job id.
   """
   syncSeriesCalendar(input: SyncSeriesCalendarInput!): ID!
+
+  """
+  Applies the import suggestion for a recording: links the event and session
+  and fills in broadcaster, language, feed and source where empty. Creates
+  the broadcaster if needed.
+  """
+  sportsImportAccept(input: ImportAcceptInput!): Scene
+  "Accepts every suggestion at or above the confidence; returns how many"
+  sportsImportAcceptAll(input: ImportAcceptAllInput): Int!
+  sportsImportDismiss(input: ImportDismissInput!): Boolean!
 
   performerCreate(input: PerformerCreateInput!): Performer
   performerUpdate(input: PerformerUpdateInput!): Performer

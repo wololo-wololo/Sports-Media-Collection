@@ -434,5 +434,13 @@ func TestSceneSportsFilters(t *testing.T) {
 		}
 
 		assert.ElementsMatch(t, all, query(t, &models.SceneFilterType{}))
+
+		p := models.NewScenePartial()
+		p.ImportDismissed = models.NewOptionalBool(true)
+		_, err := db.Scene.UpdatePartial(ctx, unlinked.ID, p)
+		require.NoError(t, err)
+		yes, no := true, false
+		assert.ElementsMatch(t, []int{unlinked.ID}, query(t, &models.SceneFilterType{ImportDismissed: &yes}))
+		assert.NotContains(t, query(t, &models.SceneFilterType{ImportDismissed: &no}), unlinked.ID)
 	})
 }
