@@ -94,6 +94,8 @@ type EventSession {
   "Display name overriding the session type label"
   name: String
   start_time: Time
+  "Winner of the session; the pole sitter for qualifying"
+  winner: String
   scenes: [Scene!]!
   scene_count: Int!
   created_at: Time!
@@ -149,6 +151,7 @@ input EventSessionCreateInput {
   session_type: SessionType!
   name: String
   start_time: Time
+  winner: String
 }
 
 input EventSessionUpdateInput {
@@ -157,6 +160,7 @@ input EventSessionUpdateInput {
   session_type: SessionType
   name: String
   start_time: Time
+  winner: String
 }
 
 input SessionTypeCriterionInput {
@@ -177,4 +181,9 @@ input RecordingSourceCriterionInput {
 input CompletenessCriterionInput {
   value: [Completeness!]
   modifier: CriterionModifier!
+}
+
+input SyncSeriesCalendarInput {
+  "Seasons to sync; all seasons when omitted or empty"
+  seasons: [Int!]
 }

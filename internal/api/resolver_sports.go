@@ -7,6 +7,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/stashapp/stash/internal/manager"
 	"github.com/stashapp/stash/pkg/models"
 )
 
@@ -392,6 +393,7 @@ func (r *mutationResolver) EventSessionCreate(ctx context.Context, input EventSe
 	newSession.SessionType = input.SessionType
 	newSession.Name = translator.string(trimmedPtr(input.Name))
 	newSession.StartTime = input.StartTime
+	newSession.Winner = translator.string(trimmedPtr(input.Winner))
 
 	if err := r.withTxn(ctx, func(ctx context.Context) error {
 		event, err := r.repository.Event.Find(ctx, eventID)
@@ -430,6 +432,7 @@ func (r *mutationResolver) EventSessionUpdate(ctx context.Context, input EventSe
 		return nil, errors.New("a session must have a session type")
 	}
 	partial.Name = translator.optionalString(trimmedPtr(input.Name), "name")
+	partial.Winner = translator.optionalString(trimmedPtr(input.Winner), "winner")
 	if translator.hasField("start_time") {
 		partial.StartTime = models.NewOptionalTimePtr(input.StartTime)
 	}
@@ -497,6 +500,33 @@ func (r *mutationResolver) EventSessionDestroy(ctx context.Context, id string) (
 	}
 
 	return true, nil
+}
+
+// ---------------------------------------------------------------------------
+// calendar sync
+
+// maxSyncSeasons bounds a single request; a full history is about 80.
+const maxSyncSeasons = 200
+
+func (r *mutationResolver) SyncSeriesCalendar(ctx context.Context, input SyncSeriesCalendarInput) (string, error) {
+	if len(input.Seasons) > maxSyncSeasons {
+		return "", fmt.Errorf("at most %d seasons can be synced at once", maxSyncSeasons)
+	}
+
+	seen := make(map[int]bool)
+	var seasons []int
+	for _, y := range input.Seasons {
+		if y < 1900 || y > 2200 {
+			return "", fmt.Errorf("invalid season %d", y)
+		}
+		if !seen[y] {
+			seen[y] = true
+			seasons = append(seasons, y)
+		}
+	}
+
+	jobID := manager.GetInstance().SyncCalendar(ctx, seasons)
+	return strconv.Itoa(jobID), nil
 }
 
 // ---------------------------------------------------------------------------

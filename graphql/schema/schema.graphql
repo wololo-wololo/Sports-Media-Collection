@@ -393,6 +393,12 @@ type Mutation {
   "Deletes the session; its recordings stay attached to the event"
   eventSessionDestroy(id: ID!): Boolean!
 
+  """
+  Syncs the Formula 1 calendar, sessions and results from Jolpica-F1 as a
+  background job, creating the series if needed. Returns the job id.
+  """
+  syncSeriesCalendar(input: SyncSeriesCalendarInput!): ID!
+
   performerCreate(input: PerformerCreateInput!): Performer
   performerUpdate(input: PerformerUpdateInput!): Performer
   performerDestroy(input: PerformerDestroyInput!): Boolean!

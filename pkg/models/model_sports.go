@@ -108,8 +108,10 @@ type EventSession struct {
 	// e.g. "Sprint Shootout".
 	Name      string     `json:"name"`
 	StartTime *time.Time `json:"start_time"`
-	CreatedAt time.Time  `json:"created_at"`
-	UpdatedAt time.Time  `json:"updated_at"`
+	// Winner of the session; the pole sitter for qualifying.
+	Winner    string    `json:"winner"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 func NewEventSession() EventSession {
@@ -125,6 +127,7 @@ type EventSessionPartial struct {
 	SessionType OptionalString
 	Name        OptionalString
 	StartTime   OptionalTime
+	Winner      OptionalString
 	CreatedAt   OptionalTime
 	UpdatedAt   OptionalTime
 }

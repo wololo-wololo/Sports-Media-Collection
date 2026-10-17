@@ -907,6 +907,16 @@ func (i *Config) GetScraperUserAgent() string {
 	return i.getString(ScraperUserAgent)
 }
 
+// SportsCalendarURL overrides the Jolpica-F1 API address used to sync the
+// Formula 1 calendar, e.g. for a self-hosted mirror.
+const SportsCalendarURL = "sports_calendar_url"
+
+// GetSportsCalendarURL returns the configured calendar API address, or an
+// empty string for the default.
+func (i *Config) GetSportsCalendarURL() string {
+	return i.getString(SportsCalendarURL)
+}
+
 // GetScraperCDPPath gets the path to the Chrome executable or remote address
 // to an instance of Chrome.
 func (i *Config) GetScraperCDPPath() string {

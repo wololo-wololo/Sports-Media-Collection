@@ -437,6 +437,7 @@ type eventSessionRow struct {
 	SessionType string        `db:"session_type"`
 	Name        zero.String   `db:"name"`
 	StartTime   NullTimestamp `db:"start_time"`
+	Winner      zero.String   `db:"winner"`
 	CreatedAt   Timestamp     `db:"created_at"`
 	UpdatedAt   Timestamp     `db:"updated_at"`
 }
@@ -447,6 +448,7 @@ func (r *eventSessionRow) fromEventSession(o models.EventSession) {
 	r.SessionType = o.SessionType.String()
 	r.Name = zero.StringFrom(o.Name)
 	r.StartTime = NullTimestampFromTimePtr(o.StartTime)
+	r.Winner = zero.StringFrom(o.Winner)
 	r.CreatedAt = Timestamp{Timestamp: o.CreatedAt}
 	r.UpdatedAt = Timestamp{Timestamp: o.UpdatedAt}
 }
@@ -458,6 +460,7 @@ func (r *eventSessionRow) resolve() *models.EventSession {
 		SessionType: models.SessionType(r.SessionType),
 		Name:        r.Name.String,
 		StartTime:   r.StartTime.TimePtr(),
+		Winner:      r.Winner.String,
 		CreatedAt:   r.CreatedAt.Timestamp,
 		UpdatedAt:   r.UpdatedAt.Timestamp,
 	}
@@ -472,6 +475,7 @@ func (r *eventSessionRowRecord) fromPartial(o models.EventSessionPartial) {
 	r.setString("session_type", o.SessionType)
 	r.setNullString("name", o.Name)
 	r.setNullTimestamp("start_time", o.StartTime)
+	r.setNullString("winner", o.Winner)
 	r.setTimestamp("created_at", o.CreatedAt)
 	r.setTimestamp("updated_at", o.UpdatedAt)
 }
