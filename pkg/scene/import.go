@@ -136,7 +136,31 @@ func (i *Importer) sceneJSONToScene(sceneJSON jsonschema.Scene) models.Scene {
 	newScene.ResumeTime = sceneJSON.ResumeTime
 	newScene.PlayDuration = sceneJSON.PlayDuration
 
+	newScene.Language = sceneJSON.Language
+	newScene.FeedSubject = sceneJSON.FeedSubject
+	newScene.Commentators = sceneJSON.Commentators
+	newScene.SyncOffset = sceneJSON.SyncOffset
+	newScene.FeedType = importedEnum[models.FeedType](sceneJSON.FeedType, "feed type", sceneJSON.Title)
+	newScene.Source = importedEnum[models.RecordingSource](sceneJSON.Source, "source", sceneJSON.Title)
+	newScene.Completeness = importedEnum[models.Completeness](sceneJSON.Completeness, "completeness", sceneJSON.Title)
+
 	return newScene
+}
+
+// importedEnum returns nil for an empty or unknown value, logging the latter.
+func importedEnum[T interface {
+	~string
+	IsValid() bool
+}](v string, field string, title string) *T {
+	if v == "" {
+		return nil
+	}
+	ret := T(v)
+	if !ret.IsValid() {
+		logger.Warnf("ignoring invalid %s %q for scene %q", field, v, title)
+		return nil
+	}
+	return &ret
 }
 
 func getHistory(historyJSON []json.JSONTime, count int, last json.JSONTime, createdAt json.JSONTime) []time.Time {

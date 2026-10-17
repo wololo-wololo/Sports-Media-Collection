@@ -27,6 +27,9 @@ type Repository struct {
 	Studio         StudioReaderWriter
 	Tag            TagReaderWriter
 	SavedFilter    SavedFilterReaderWriter
+	Series         SeriesReaderWriter
+	Event          EventReaderWriter
+	EventSession   EventSessionReaderWriter
 }
 
 func (r *Repository) WithTxn(ctx context.Context, fn txn.TxnFunc) error {

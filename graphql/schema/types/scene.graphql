@@ -80,6 +80,21 @@ type Scene {
   performers: [Performer!]!
   stash_ids: [StashID!]!
 
+  "Event this recording belongs to"
+  event: Event
+  "Session this recording covers"
+  session: EventSession
+  "Commentary language as a BCP 47 code, e.g. en"
+  language: String
+  feed_type: FeedType
+  "Subject of the feed, e.g. the driver of an onboard"
+  feed_subject: String
+  source: RecordingSource
+  completeness: Completeness
+  commentators: String
+  "Seconds into the recording at which the session's reference moment occurs"
+  sync_offset: Float
+
   custom_fields: Map!
 
   "Return valid stream paths"
@@ -125,6 +140,21 @@ input SceneCreateInput {
   """
   file_ids: [ID!]
 
+  "Event this recording belongs to"
+  event_id: ID
+  "Session this recording covers; sets the event as well"
+  session_id: ID
+  "Commentary language as a BCP 47 code, e.g. en"
+  language: String
+  feed_type: FeedType
+  "Subject of the feed, e.g. the driver of an onboard"
+  feed_subject: String
+  source: RecordingSource
+  completeness: Completeness
+  commentators: String
+  "Seconds into the recording at which the session's reference moment occurs"
+  sync_offset: Float
+
   custom_fields: Map
 }
 
@@ -166,6 +196,21 @@ input SceneUpdateInput {
 
   primary_file_id: ID
 
+  "Event this recording belongs to"
+  event_id: ID
+  "Session this recording covers; sets the event as well"
+  session_id: ID
+  "Commentary language as a BCP 47 code, e.g. en"
+  language: String
+  feed_type: FeedType
+  "Subject of the feed, e.g. the driver of an onboard"
+  feed_subject: String
+  source: RecordingSource
+  completeness: Completeness
+  commentators: String
+  "Seconds into the recording at which the session's reference moment occurs"
+  sync_offset: Float
+
   custom_fields: CustomFieldsInput
 }
 
@@ -200,6 +245,21 @@ input BulkSceneUpdateInput {
   tag_ids: BulkUpdateIds
   group_ids: BulkUpdateIds
   movie_ids: BulkUpdateIds @deprecated(reason: "Use group_ids")
+
+  "Event this recording belongs to"
+  event_id: ID
+  "Session this recording covers; sets the event as well"
+  session_id: ID
+  "Commentary language as a BCP 47 code, e.g. en"
+  language: String
+  feed_type: FeedType
+  "Subject of the feed, e.g. the driver of an onboard"
+  feed_subject: String
+  source: RecordingSource
+  completeness: Completeness
+  commentators: String
+  "Seconds into the recording at which the session's reference moment occurs"
+  sync_offset: Float
 
   custom_fields: CustomFieldsInput
 }

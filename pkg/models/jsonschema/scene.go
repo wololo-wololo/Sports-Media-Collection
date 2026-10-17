@@ -73,6 +73,16 @@ type Scene struct {
 
 	ResumeTime float64 `json:"resume_time,omitempty"`
 
+	// Sports recording fields. Links to events and sessions are not
+	// exported; they are restored from the series calendars.
+	Language     string   `json:"language,omitempty"`
+	FeedType     string   `json:"feed_type,omitempty"`
+	FeedSubject  string   `json:"feed_subject,omitempty"`
+	Source       string   `json:"source,omitempty"`
+	Completeness string   `json:"completeness,omitempty"`
+	Commentators string   `json:"commentators,omitempty"`
+	SyncOffset   *float64 `json:"sync_offset,omitempty"`
+
 	// deprecated - for import only
 	PlayCount int `json:"play_count,omitempty"`
 

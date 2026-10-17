@@ -67,6 +67,17 @@ type sceneRow struct {
 	ResumeTime   float64   `db:"resume_time"`
 	PlayDuration float64   `db:"play_duration"`
 
+	// sports recording fields
+	EventID      null.Int    `db:"event_id,omitempty"`
+	SessionID    null.Int    `db:"session_id,omitempty"`
+	Language     zero.String `db:"language"`
+	FeedType     zero.String `db:"feed_type"`
+	FeedSubject  zero.String `db:"feed_subject"`
+	Source       zero.String `db:"source"`
+	Completeness zero.String `db:"completeness"`
+	Commentators zero.String `db:"commentators"`
+	SyncOffset   null.Float  `db:"sync_offset"`
+
 	// not used in resolutions or updates
 	CoverBlob zero.String `db:"cover_blob"`
 }
@@ -88,6 +99,30 @@ func (r *sceneRow) fromScene(o models.Scene) {
 	r.UpdatedAt = Timestamp{Timestamp: o.UpdatedAt}
 	r.ResumeTime = o.ResumeTime
 	r.PlayDuration = o.PlayDuration
+	r.EventID = intFromPtr(o.EventID)
+	r.SessionID = intFromPtr(o.SessionID)
+	r.Language = zero.StringFrom(o.Language)
+	r.FeedType = enumToZeroString(o.FeedType)
+	r.FeedSubject = zero.StringFrom(o.FeedSubject)
+	r.Source = enumToZeroString(o.Source)
+	r.Completeness = enumToZeroString(o.Completeness)
+	r.Commentators = zero.StringFrom(o.Commentators)
+	r.SyncOffset = null.FloatFromPtr(o.SyncOffset)
+}
+
+func enumToZeroString[T ~string](v *T) zero.String {
+	if v == nil {
+		return zero.String{}
+	}
+	return zero.StringFrom(string(*v))
+}
+
+func zeroStringToEnum[T ~string](v zero.String) *T {
+	if !v.Valid || v.String == "" {
+		return nil
+	}
+	ret := T(v.String)
+	return &ret
 }
 
 type sceneQueryRow struct {
@@ -121,6 +156,16 @@ func (r *sceneQueryRow) resolve() *models.Scene {
 
 		ResumeTime:   r.ResumeTime,
 		PlayDuration: r.PlayDuration,
+
+		EventID:      nullIntPtr(r.EventID),
+		SessionID:    nullIntPtr(r.SessionID),
+		Language:     r.Language.String,
+		FeedType:     zeroStringToEnum[models.FeedType](r.FeedType),
+		FeedSubject:  r.FeedSubject.String,
+		Source:       zeroStringToEnum[models.RecordingSource](r.Source),
+		Completeness: zeroStringToEnum[models.Completeness](r.Completeness),
+		Commentators: r.Commentators.String,
+		SyncOffset:   r.SyncOffset.Ptr(),
 	}
 
 	if r.PrimaryFileFolderPath.Valid && r.PrimaryFileBasename.Valid {
@@ -148,6 +193,15 @@ func (r *sceneRowRecord) fromPartial(o models.ScenePartial) {
 	r.setTimestamp("updated_at", o.UpdatedAt)
 	r.setFloat64("resume_time", o.ResumeTime)
 	r.setFloat64("play_duration", o.PlayDuration)
+	r.setNullInt("event_id", o.EventID)
+	r.setNullInt("session_id", o.SessionID)
+	r.setNullString("language", o.Language)
+	r.setNullString("feed_type", o.FeedType)
+	r.setNullString("feed_subject", o.FeedSubject)
+	r.setNullString("source", o.Source)
+	r.setNullString("completeness", o.Completeness)
+	r.setNullString("commentators", o.Commentators)
+	r.setNullFloat64("sync_offset", o.SyncOffset)
 }
 
 type sceneRepositoryType struct {

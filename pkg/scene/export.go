@@ -55,6 +55,20 @@ func ToBasicJSON(ctx context.Context, reader ExportGetter, scene *models.Scene) 
 
 	newSceneJSON.Organized = scene.Organized
 
+	newSceneJSON.Language = scene.Language
+	newSceneJSON.FeedSubject = scene.FeedSubject
+	newSceneJSON.Commentators = scene.Commentators
+	newSceneJSON.SyncOffset = scene.SyncOffset
+	if scene.FeedType != nil {
+		newSceneJSON.FeedType = scene.FeedType.String()
+	}
+	if scene.Source != nil {
+		newSceneJSON.Source = scene.Source.String()
+	}
+	if scene.Completeness != nil {
+		newSceneJSON.Completeness = scene.Completeness.String()
+	}
+
 	for _, f := range scene.Files.List() {
 		newSceneJSON.Files = append(newSceneJSON.Files, f.Base().Path)
 	}

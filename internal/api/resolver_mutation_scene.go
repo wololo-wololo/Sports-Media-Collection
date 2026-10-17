@@ -65,6 +65,9 @@ func (r *mutationResolver) SceneCreate(ctx context.Context, input models.SceneCr
 	if err != nil {
 		return nil, fmt.Errorf("converting studio id: %w", err)
 	}
+	if err := sceneSportsFromCreate(input).applyToNewScene(&newScene, translator); err != nil {
+		return nil, err
+	}
 
 	if input.Urls != nil {
 		newScene.URLs = models.NewRelatedStrings(stringslice.TrimSpace(input.Urls))
@@ -110,6 +113,10 @@ func (r *mutationResolver) SceneCreate(ctx context.Context, input models.SceneCr
 	customFields := convertMapJSONNumbers(input.CustomFields)
 
 	if err := r.withTxn(ctx, func(ctx context.Context) error {
+		if err := reconcileNewSceneEventLinks(ctx, r.repository, &newScene); err != nil {
+			return err
+		}
+
 		ret, err = r.Resolver.sceneService.Create(ctx, models.CreateSceneInput{
 			Scene:        &newScene,
 			FileIDs:      fileIDs,
@@ -222,6 +229,10 @@ func scenePartialFromInput(input models.SceneUpdateInput, translator changesetTr
 
 	updatedScene.URLs = translator.optionalURLs(input.Urls, input.URL)
 
+	if err := sceneSportsFromUpdate(input).applyToPartial(&updatedScene, translator); err != nil {
+		return nil, err
+	}
+
 	updatedScene.PrimaryFileID, err = translator.fileIDPtrFromString(input.PrimaryFileID)
 	if err != nil {
 		return nil, fmt.Errorf("converting primary file id: %w", err)
@@ -330,6 +341,10 @@ func (r *mutationResolver) sceneUpdate(ctx context.Context, input models.SceneUp
 		customFields.Partial = convertMapJSONNumbers(customFields.Partial)
 	}
 
+	if err := reconcileSceneEventLinks(ctx, r.repository, originalScene.EventID, originalScene.SessionID, updatedScene); err != nil {
+		return nil, err
+	}
+
 	scene, err := qb.UpdatePartial(ctx, sceneID, *updatedScene)
 	if err != nil {
 		return nil, err
@@ -396,6 +411,10 @@ func (r *mutationResolver) BulkSceneUpdate(ctx context.Context, input BulkSceneU
 
 	updatedScene.URLs = translator.optionalURLsBulk(input.Urls, input.URL)
 
+	if err := sceneSportsFromBulk(input).applyToPartial(&updatedScene, translator); err != nil {
+		return nil, err
+	}
+
 	updatedScene.PerformerIDs, err = translator.updateIdsBulk(input.PerformerIds, "performer_ids")
 	if err != nil {
 		return nil, fmt.Errorf("converting performer ids: %w", err)
@@ -434,7 +453,21 @@ func (r *mutationResolver) BulkSceneUpdate(ctx context.Context, input BulkSceneU
 		qb := r.repository.Scene
 
 		for _, sceneID := range sceneIDs {
-			scene, err := qb.UpdatePartial(ctx, sceneID, updatedScene)
+			partial := updatedScene
+			if partial.EventID.Set || partial.SessionID.Set {
+				existing, err := qb.Find(ctx, sceneID)
+				if err != nil {
+					return err
+				}
+				if existing == nil {
+					return fmt.Errorf("scene with id %d not found", sceneID)
+				}
+				if err := reconcileSceneEventLinks(ctx, r.repository, existing.EventID, existing.SessionID, &partial); err != nil {
+					return err
+				}
+			}
+
+			scene, err := qb.UpdatePartial(ctx, sceneID, partial)
 			if err != nil {
 				return err
 			}

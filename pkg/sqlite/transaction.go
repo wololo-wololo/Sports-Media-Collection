@@ -131,5 +131,8 @@ func (db *Database) Repository() models.Repository {
 		Studio:         db.Studio,
 		Tag:            db.Tag,
 		SavedFilter:    db.SavedFilter,
+		Series:         db.Series,
+		Event:          db.Event,
+		EventSession:   db.EventSession,
 	}
 }

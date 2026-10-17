@@ -433,3 +433,20 @@ var (
 		idColumn: goqu.T(savedFilterTable).Col(idColumn),
 	}
 )
+
+var (
+	seriesTableMgr = &table{
+		table:    goqu.T(seriesTable),
+		idColumn: goqu.T(seriesTable).Col(idColumn),
+	}
+
+	eventsTableMgr = &table{
+		table:    goqu.T(eventsTable),
+		idColumn: goqu.T(eventsTable).Col(idColumn),
+	}
+
+	eventSessionsTableMgr = &table{
+		table:    goqu.T(eventSessionsTable),
+		idColumn: goqu.T(eventSessionsTable).Col(idColumn),
+	}
+)

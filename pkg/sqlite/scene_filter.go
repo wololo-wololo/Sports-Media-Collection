@@ -193,6 +193,8 @@ func (qb *sceneFilterHandler) criterionHandler() criterionHandler {
 		qb.duplicatedCriterionHandler(sceneFilter.Duplicated),
 		&dateCriterionHandler{sceneFilter.Date, "scenes.date", nil},
 		&dateCriterionHandler{sceneFilter.ProductionDate, "scenes.production_date", nil},
+
+		sceneSportsCriterionHandlers(sceneFilter),
 		&timestampCriterionHandler{sceneFilter.CreatedAt, "scenes.created_at", nil},
 		&timestampCriterionHandler{sceneFilter.UpdatedAt, "scenes.updated_at", nil},
 

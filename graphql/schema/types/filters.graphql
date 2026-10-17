@@ -355,6 +355,23 @@ input SceneFilterType {
   date: DateCriterionInput
   "Filter by production date"
   production_date: DateCriterionInput
+  "Filter by the series of the recording's event"
+  series: MultiCriterionInput
+  "Filter by event"
+  events: MultiCriterionInput
+  "Filter by event session"
+  sessions: MultiCriterionInput
+  "Filter by the season of the recording's event"
+  season: IntCriterionInput
+  "Filter by the type of the recording's session"
+  session_type: SessionTypeCriterionInput
+  "Filter by commentary language code"
+  language: StringCriterionInput
+  feed_type: FeedTypeCriterionInput
+  feed_subject: StringCriterionInput
+  source: RecordingSourceCriterionInput
+  completeness: CompletenessCriterionInput
+  commentators: StringCriterionInput
   "Filter by creation time"
   created_at: TimestampCriterionInput
   "Filter by last update time"

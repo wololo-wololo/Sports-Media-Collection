@@ -121,6 +121,18 @@ type SceneFilterType struct {
 	Date *DateCriterionInput `json:"date"`
 	// Filter by production date
 	ProductionDate *DateCriterionInput `json:"production_date"`
+	// Sports filters
+	Series       *MultiCriterionInput           `json:"series"`
+	Events       *MultiCriterionInput           `json:"events"`
+	Sessions     *MultiCriterionInput           `json:"sessions"`
+	Season       *IntCriterionInput             `json:"season"`
+	SessionType  *SessionTypeCriterionInput     `json:"session_type"`
+	Language     *StringCriterionInput          `json:"language"`
+	FeedType     *FeedTypeCriterionInput        `json:"feed_type"`
+	FeedSubject  *StringCriterionInput          `json:"feed_subject"`
+	Source       *RecordingSourceCriterionInput `json:"source"`
+	Completeness *CompletenessCriterionInput    `json:"completeness"`
+	Commentators *StringCriterionInput          `json:"commentators"`
 	// Filter by related galleries that meet this criteria
 	GalleriesFilter *GalleryFilterType `json:"galleries_filter"`
 	// Filter by related performers that meet this criteria
@@ -200,6 +212,16 @@ type SceneCreateInput struct {
 	// Files must not already be primary for another scene.
 	FileIds      []string       `json:"file_ids"`
 	CustomFields map[string]any `json:"custom_fields,omitempty"`
+
+	EventID      *string          `json:"event_id"`
+	SessionID    *string          `json:"session_id"`
+	Language     *string          `json:"language"`
+	FeedType     *FeedType        `json:"feed_type"`
+	FeedSubject  *string          `json:"feed_subject"`
+	Source       *RecordingSource `json:"source"`
+	Completeness *Completeness    `json:"completeness"`
+	Commentators *string          `json:"commentators"`
+	SyncOffset   *float64         `json:"sync_offset"`
 }
 
 type SceneUpdateInput struct {
@@ -230,6 +252,16 @@ type SceneUpdateInput struct {
 	PlayCount     *int           `json:"play_count"`
 	PrimaryFileID *string        `json:"primary_file_id"`
 	CustomFields  *CustomFieldsInput
+
+	EventID      *string          `json:"event_id"`
+	SessionID    *string          `json:"session_id"`
+	Language     *string          `json:"language"`
+	FeedType     *FeedType        `json:"feed_type"`
+	FeedSubject  *string          `json:"feed_subject"`
+	Source       *RecordingSource `json:"source"`
+	Completeness *Completeness    `json:"completeness"`
+	Commentators *string          `json:"commentators"`
+	SyncOffset   *float64         `json:"sync_offset"`
 }
 
 type SceneDestroyInput struct {

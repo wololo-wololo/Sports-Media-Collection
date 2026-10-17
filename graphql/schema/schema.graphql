@@ -1,5 +1,14 @@
 "The query root for this schema"
 type Query {
+  # Sports
+  "All series, ordered by name"
+  allSeries: [Series!]!
+  findSeries(id: ID!): Series
+  "Events ordered by season and round, optionally limited to a series and season"
+  findEvents(series_id: ID, season: Int): [Event!]!
+  findEvent(id: ID!): Event
+  findEventSession(id: ID!): EventSession
+
   # Filters
   findSavedFilter(id: ID!): SavedFilter
   findSavedFilters(mode: FilterMode): [SavedFilter!]!
@@ -368,6 +377,21 @@ type Mutation {
   galleryChapterCreate(input: GalleryChapterCreateInput!): GalleryChapter
   galleryChapterUpdate(input: GalleryChapterUpdateInput!): GalleryChapter
   galleryChapterDestroy(id: ID!): Boolean!
+
+  seriesCreate(input: SeriesCreateInput!): Series
+  seriesUpdate(input: SeriesUpdateInput!): Series
+  "Deletes the series with its events and sessions; recordings are kept"
+  seriesDestroy(id: ID!): Boolean!
+
+  eventCreate(input: EventCreateInput!): Event
+  eventUpdate(input: EventUpdateInput!): Event
+  "Deletes the event with its sessions; recordings are kept"
+  eventDestroy(id: ID!): Boolean!
+
+  eventSessionCreate(input: EventSessionCreateInput!): EventSession
+  eventSessionUpdate(input: EventSessionUpdateInput!): EventSession
+  "Deletes the session; its recordings stay attached to the event"
+  eventSessionDestroy(id: ID!): Boolean!
 
   performerCreate(input: PerformerCreateInput!): Performer
   performerUpdate(input: PerformerUpdateInput!): Performer

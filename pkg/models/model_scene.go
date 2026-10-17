@@ -38,6 +38,21 @@ type Scene struct {
 	ResumeTime   float64 `json:"resume_time"`
 	PlayDuration float64 `json:"play_duration"`
 
+	// Sports recording fields. EventID is set for every recording of an
+	// event; SessionID additionally when it covers a specific session.
+	EventID   *int `json:"event_id"`
+	SessionID *int `json:"session_id"`
+	// Language is the commentary language as a BCP 47 code, e.g. "en".
+	Language     string           `json:"language"`
+	FeedType     *FeedType        `json:"feed_type"`
+	FeedSubject  string           `json:"feed_subject"`
+	Source       *RecordingSource `json:"source"`
+	Completeness *Completeness    `json:"completeness"`
+	Commentators string           `json:"commentators"`
+	// SyncOffset is the position in seconds at which the session's reference
+	// moment (such as lights out) occurs, used to switch between feeds.
+	SyncOffset *float64 `json:"sync_offset"`
+
 	URLs         RelatedStrings  `json:"urls"`
 	GalleryIDs   RelatedIDs      `json:"gallery_ids"`
 	TagIDs       RelatedIDs      `json:"tag_ids"`
@@ -85,6 +100,16 @@ type ScenePartial struct {
 	UpdatedAt    OptionalTime
 	ResumeTime   OptionalFloat64
 	PlayDuration OptionalFloat64
+
+	EventID      OptionalInt
+	SessionID    OptionalInt
+	Language     OptionalString
+	FeedType     OptionalString
+	FeedSubject  OptionalString
+	Source       OptionalString
+	Completeness OptionalString
+	Commentators OptionalString
+	SyncOffset   OptionalFloat64
 
 	URLs          *UpdateStrings
 	GalleryIDs    *UpdateIDs

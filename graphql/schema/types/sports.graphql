@@ -1,0 +1,180 @@
+"Kind of session within an event"
+enum SessionType {
+  PRACTICE_1
+  PRACTICE_2
+  PRACTICE_3
+  PRACTICE
+  QUALIFYING
+  SPRINT_QUALIFYING
+  SPRINT
+  WARM_UP
+  RACE
+  MATCH
+  OTHER
+}
+
+"Which picture a recording shows"
+enum FeedType {
+  WORLD_FEED
+  ONBOARD
+  PIT_LANE
+  DATA_CHANNEL
+  DRIVER_TRACKER
+  "Studio programming such as build-up or analysis shows"
+  STUDIO
+  HIGHLIGHTS
+  DOCUMENTARY
+  OTHER
+}
+
+"Where a recording came from"
+enum RecordingSource {
+  TV
+  STREAMING
+  DVD
+  BLU_RAY
+  VHS
+  WEB
+  OTHER
+}
+
+"Whether a recording covers its whole session"
+enum Completeness {
+  COMPLETE
+  PARTIAL
+}
+
+"A competition such as Formula 1 or MotoGP"
+type Series {
+  id: ID!
+  name: String!
+  short_name: String
+  "Sport the series belongs to, e.g. Motorsport"
+  sport: String!
+  "Display colour in hex notation"
+  color: String
+  "Where calendar data is synced from, e.g. jolpica-f1"
+  data_source: String
+  "Seasons that have events, newest first"
+  seasons: [Int!]!
+  event_count: Int!
+  created_at: Time!
+  updated_at: Time!
+}
+
+"A meeting within a series season, such as a Grand Prix"
+type Event {
+  id: ID!
+  series: Series!
+  season: Int!
+  round: Int
+  name: String!
+  circuit: String
+  location: String
+  country: String
+  "First day of the event, YYYY-MM-DD"
+  start_date: String
+  "Last day of the event, YYYY-MM-DD"
+  end_date: String
+  "Identifier used by the series data source"
+  external_id: String
+  sessions: [EventSession!]!
+  "Recordings of this event, including session recordings"
+  scenes: [Scene!]!
+  scene_count: Int!
+  created_at: Time!
+  updated_at: Time!
+}
+
+"A session of an event, such as qualifying or the race"
+type EventSession {
+  id: ID!
+  event: Event!
+  session_type: SessionType!
+  "Display name overriding the session type label"
+  name: String
+  start_time: Time
+  scenes: [Scene!]!
+  scene_count: Int!
+  created_at: Time!
+  updated_at: Time!
+}
+
+input SeriesCreateInput {
+  name: String!
+  short_name: String
+  sport: String
+  color: String
+  data_source: String
+}
+
+input SeriesUpdateInput {
+  id: ID!
+  name: String
+  short_name: String
+  sport: String
+  color: String
+  data_source: String
+}
+
+input EventCreateInput {
+  series_id: ID!
+  season: Int!
+  round: Int
+  name: String!
+  circuit: String
+  location: String
+  country: String
+  start_date: String
+  end_date: String
+  external_id: String
+}
+
+input EventUpdateInput {
+  id: ID!
+  series_id: ID
+  season: Int
+  round: Int
+  name: String
+  circuit: String
+  location: String
+  country: String
+  start_date: String
+  end_date: String
+  external_id: String
+}
+
+input EventSessionCreateInput {
+  event_id: ID!
+  session_type: SessionType!
+  name: String
+  start_time: Time
+}
+
+input EventSessionUpdateInput {
+  id: ID!
+  event_id: ID
+  session_type: SessionType
+  name: String
+  start_time: Time
+}
+
+input SessionTypeCriterionInput {
+  value: [SessionType!]
+  modifier: CriterionModifier!
+}
+
+input FeedTypeCriterionInput {
+  value: [FeedType!]
+  modifier: CriterionModifier!
+}
+
+input RecordingSourceCriterionInput {
+  value: [RecordingSource!]
+  modifier: CriterionModifier!
+}
+
+input CompletenessCriterionInput {
+  value: [Completeness!]
+  modifier: CriterionModifier!
+}
