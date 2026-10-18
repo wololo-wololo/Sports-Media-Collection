@@ -28,7 +28,7 @@ import { ErrorBoundary } from "./components/ErrorBoundary";
 import { MainNavbar } from "./components/MainNavbar";
 import { PageNotFound } from "./components/PageNotFound";
 import * as GQL from "./core/generated-graphql";
-import { makeTitleProps } from "./hooks/title";
+import { makeTitleProps, TITLE } from "./hooks/title";
 import { LoadingIndicator } from "./components/Shared/LoadingIndicator";
 
 import { ConfigurationProvider } from "./hooks/Config";
@@ -59,6 +59,12 @@ const Performers = lazyComponent(
 );
 const FrontPage = lazyComponent(
   () => import("./components/FrontPage/FrontPage")
+);
+const LibraryHome = lazyComponent(
+  () => import("./components/Sports/LibraryHome")
+);
+const SportsRoutes = lazyComponent(
+  () => import("./components/Sports/SportsRoutes")
 );
 const Scenes = lazyComponent(() => import("./components/Scenes/Scenes"));
 const Settings = lazyComponent(() => import("./components/Settings/Settings"));
@@ -244,7 +250,18 @@ export const App: React.FC = () => {
       <ErrorBoundary>
         <Suspense fallback={<LoadingIndicator />}>
           <Switch>
-            <Route exact path="/" component={FrontPage} />
+            <Route exact path="/" component={LibraryHome} />
+            <Route path="/front" component={FrontPage} />
+            <Route
+              path={[
+                "/seasons",
+                "/series",
+                "/events",
+                "/recordings",
+                "/import",
+              ]}
+              component={SportsRoutes}
+            />
             <Route path="/scenes" component={Scenes} />
             <Route path="/images" component={Images} />
             <Route path="/galleries" component={Galleries} />
@@ -302,7 +319,7 @@ export const App: React.FC = () => {
     );
   }
 
-  const title = config.data?.configuration.ui.title || "Stash";
+  const title = config.data?.configuration.ui.title || TITLE;
   const titleProps = makeTitleProps(title);
   const htmlAttributes = { lang: language };
 

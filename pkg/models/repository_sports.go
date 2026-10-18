@@ -32,6 +32,15 @@ type EventReaderWriter interface {
 	CountBySeriesID(ctx context.Context, seriesID int) (int, error)
 	// Seasons returns the distinct seasons of a series in descending order.
 	Seasons(ctx context.Context, seriesID int) ([]int, error)
+	// RecordingCounts counts the recordings of each event and session of a
+	// series season. Recordings of an event without a session have a nil
+	// SessionID.
+	RecordingCounts(ctx context.Context, seriesID int, season int) ([]RecordingCount, error)
+	// SeasonStats summarises every season of a series, newest first.
+	SeasonStats(ctx context.Context, seriesID int) ([]SeasonStats, error)
+	// RecordingLanguages returns the distinct commentary languages of all
+	// recordings, sorted.
+	RecordingLanguages(ctx context.Context) ([]string, error)
 
 	Create(ctx context.Context, newEvent *Event) error
 	UpdatePartial(ctx context.Context, id int, partial EventPartial) (*Event, error)

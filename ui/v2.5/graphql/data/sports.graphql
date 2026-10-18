@@ -1,0 +1,80 @@
+fragment SeriesData on Series {
+  id
+  name
+  short_name
+  sport
+  color
+  data_source
+  seasons
+  event_count
+  scene_count
+}
+
+fragment EventSessionData on EventSession {
+  id
+  session_type
+  name
+  start_time
+  winner
+}
+
+fragment EventData on Event {
+  id
+  season
+  round
+  name
+  circuit
+  location
+  country
+  start_date
+  end_date
+  external_id
+  series {
+    id
+    name
+    short_name
+    color
+  }
+}
+
+# A recording as shown in the sports screens.
+fragment RecordingData on Scene {
+  id
+  title
+  rating100
+  resume_time
+  play_count
+  last_played_at
+  created_at
+  language
+  feed_type
+  feed_subject
+  source
+  completeness
+  commentators
+  sync_offset
+  import_dismissed
+  files {
+    id
+    path
+    basename
+    duration
+    width
+    height
+    frame_rate
+    video_codec
+  }
+  paths {
+    screenshot
+  }
+  studio {
+    id
+    name
+  }
+  event {
+    ...EventData
+  }
+  session {
+    ...EventSessionData
+  }
+}

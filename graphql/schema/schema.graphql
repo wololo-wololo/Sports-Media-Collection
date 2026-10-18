@@ -8,6 +8,12 @@ type Query {
   findEvents(series_id: ID, season: Int): [Event!]!
   findEvent(id: ID!): Event
   findEventSession(id: ID!): EventSession
+  "Every event of a season with recording counts per session"
+  seasonCoverage(series_id: ID!, season: Int!): [EventCoverage!]!
+  "Totals for every season of a series, newest first"
+  seriesCoverage(series_id: ID!): [SeasonCoverage!]!
+  "Distinct commentary languages of the recordings, sorted"
+  recordingLanguages: [String!]!
   "Suggested calendar links for recordings, read from file and folder names"
   sportsImportSuggestions(input: ImportSuggestionsInput): FindImportSuggestionsResultType!
 

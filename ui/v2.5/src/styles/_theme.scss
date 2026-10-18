@@ -1,33 +1,63 @@
-/* Blueprint dark theme */
+/* Pit Wall theme: a dark timing-screen look with amber for actions */
 
-$secondary: #394b59;
-$muted-gray: #bfccd6;
-$success: #0f9960;
+$secondary: #2e353e;
+$muted-gray: #9aa3ae;
+$success: #1c7a4e;
 $warning: #d9822b;
-$danger: #db3737;
+$danger: #c93a3a;
 
 $theme-colors: (
-  primary: #137cbd,
+  primary: #ffb800,
   secondary: $secondary,
   success: $success,
   warning: $warning,
   danger: $danger,
-  dark: #394b59,
+  dark: #161a1f,
 );
 
-$body-bg: #202b33;
+$body-bg: #0e1013;
 $text-muted: $muted-gray;
-$link-color: #48aff0;
-$link-hover-color: $link-color;
-$text-color: #f5f8fa;
+$link-color: #ffb800;
+$link-hover-color: #ffd066;
+$text-color: #e9ecef;
 $pre-color: $text-color;
-$navbar-dark-color: rgb(245, 248, 250);
-$popover-bg: $secondary;
-$dark-text: #182026;
-$textfield-bg: rgba(16, 22, 26, 0.3);
-$card-bg: #30404d;
+$navbar-dark-color: rgb(233, 236, 239);
+$popover-bg: #232830;
+$dark-text: #14110a;
+$textfield-bg: rgba(255, 255, 255, 0.04);
+$card-bg: #161a1f;
 $card-cap-bg: rgba(#000, 0.03);
+$border-color: #232830;
 
+$font-family-sans-serif: "IBM Plex Sans", system-ui, -apple-system,
+  "Segoe UI", sans-serif;
+$font-family-monospace: "IBM Plex Mono", source-code-pro, Menlo, Consolas,
+  monospace;
+$headings-font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+$headings-font-weight: 600;
+
+// colours used by the sports screens
+$pw-surface: #161a1f;
+$pw-surface-2: #1b2026;
+$pw-line: #232830;
+$pw-line-strong: #2e353e;
+$pw-amber: #ffb800;
+$pw-amber-soft: #ffd066;
+$pw-amber-bg: #2a2210;
+$pw-muted: #9aa3ae;
+$pw-world: #203246;
+$pw-world-text: #a9d7ff;
+$pw-onboard: #3a2a12;
+$pw-onboard-text: #ffd08a;
+$pw-data: #2d2442;
+$pw-data-text: #d3c2ff;
+$pw-good: #1c5a3e;
+$pw-good-text: #c9f7dd;
+$pw-multi: #5b3bc9;
+$pw-part: #5a410c;
+$pw-part-text: #ffe19a;
+
+@import "fonts";
 @import "bootstrap/scss/bootstrap";
 
 $red1: #a82a2a;
@@ -117,7 +147,7 @@ hr {
 
   thead {
     th {
-      border-bottom: 1px solid #414c53;
+      border-bottom: 1px solid $pw-line-strong;
       border-right: none;
       border-top: none;
     }
@@ -125,7 +155,7 @@ hr {
 
   td {
     border: none;
-    border-color: #414c53;
+    border-color: $pw-line-strong;
     padding: 0.25rem 0.75rem;
   }
 }

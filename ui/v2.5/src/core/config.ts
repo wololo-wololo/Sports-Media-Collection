@@ -41,6 +41,10 @@ export const defaultMaxOptionsShown = 200;
 export const defaultPreviewVolume = 25;
 
 export interface IUIConfig {
+  // hide race results until a recording of the race has been watched;
+  // on unless set to false
+  sportsSpoilerShield?: boolean;
+
   // unknown to prevent direct access - use getFrontPageContent
   frontPageContent?: unknown;
 

@@ -45,15 +45,16 @@ import {
 import { defaultMaxOptionsShown, defaultPreviewVolume } from "src/core/config";
 import { PatchComponent } from "src/patch";
 
+// the sports screens (home, seasons, recordings, import) are always shown
 const allMenuItems = [
-  { id: "scenes", headingID: "scenes" },
+  { id: "studios", headingID: "studios" },
+  { id: "performers", headingID: "performers" },
+  { id: "tags", headingID: "tags" },
+  { id: "scenes", headingID: "sports.nav.all_videos" },
   { id: "images", headingID: "images" },
   { id: "groups", headingID: "groups" },
   { id: "markers", headingID: "markers" },
   { id: "galleries", headingID: "galleries" },
-  { id: "performers", headingID: "performers" },
-  { id: "studios", headingID: "studios" },
-  { id: "tags", headingID: "tags" },
 ];
 
 export const SettingsInterfacePanel: React.FC = PatchComponent(

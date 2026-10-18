@@ -2,6 +2,7 @@ package sqlite
 
 import (
 	"context"
+	"database/sql"
 	"fmt"
 
 	"github.com/doug-martin/goqu/v9"
@@ -425,6 +426,87 @@ func (qb *EventStore) Seasons(ctx context.Context, seriesID int) ([]int, error) 
 		return nil, err
 	}
 
+	return ret, nil
+}
+
+func (qb *EventStore) RecordingCounts(ctx context.Context, seriesID int, season int) ([]models.RecordingCount, error) {
+	const query = `
+		SELECT scenes.event_id, scenes.session_id, COUNT(*),
+			SUM(CASE WHEN scenes.completeness = 'PARTIAL' THEN 1 ELSE 0 END)
+		FROM scenes
+		INNER JOIN events ON events.id = scenes.event_id
+		WHERE events.series_id = ? AND events.season = ?
+		GROUP BY scenes.event_id, scenes.session_id`
+
+	var ret []models.RecordingCount
+	const single = false
+	if err := qb.queryFunc(ctx, query, []interface{}{seriesID, season}, single, func(r *sqlx.Rows) error {
+		var c models.RecordingCount
+		var sessionID sql.NullInt64
+		if err := r.Scan(&c.EventID, &sessionID, &c.Recordings, &c.Partial); err != nil {
+			return err
+		}
+		if sessionID.Valid {
+			id := int(sessionID.Int64)
+			c.SessionID = &id
+		}
+		ret = append(ret, c)
+		return nil
+	}); err != nil {
+		return nil, err
+	}
+
+	return ret, nil
+}
+
+func (qb *EventStore) SeasonStats(ctx context.Context, seriesID int) ([]models.SeasonStats, error) {
+	const query = `
+		SELECT events.season,
+			COUNT(DISTINCT events.id),
+			COUNT(DISTINCT event_sessions.id),
+			COUNT(DISTINCT CASE WHEN EXISTS (
+				SELECT 1 FROM scenes WHERE scenes.session_id = event_sessions.id
+			) THEN event_sessions.id END),
+			(SELECT COUNT(*) FROM scenes
+				INNER JOIN events AS e2 ON e2.id = scenes.event_id
+				WHERE e2.series_id = events.series_id AND e2.season = events.season)
+		FROM events
+		LEFT JOIN event_sessions ON event_sessions.event_id = events.id
+		WHERE events.series_id = ?
+		GROUP BY events.season
+		ORDER BY events.season DESC`
+
+	var ret []models.SeasonStats
+	const single = false
+	if err := qb.queryFunc(ctx, query, []interface{}{seriesID}, single, func(r *sqlx.Rows) error {
+		var s models.SeasonStats
+		if err := r.Scan(&s.Season, &s.Events, &s.Sessions, &s.CoveredSessions, &s.Recordings); err != nil {
+			return err
+		}
+		ret = append(ret, s)
+		return nil
+	}); err != nil {
+		return nil, err
+	}
+
+	return ret, nil
+}
+
+func (qb *EventStore) RecordingLanguages(ctx context.Context) ([]string, error) {
+	const query = `SELECT DISTINCT language FROM scenes WHERE language IS NOT NULL AND language != '' ORDER BY language`
+
+	ret := []string{}
+	const single = false
+	if err := qb.queryFunc(ctx, query, nil, single, func(r *sqlx.Rows) error {
+		var l string
+		if err := r.Scan(&l); err != nil {
+			return err
+		}
+		ret = append(ret, l)
+		return nil
+	}); err != nil {
+		return nil, err
+	}
 	return ret, nil
 }
 

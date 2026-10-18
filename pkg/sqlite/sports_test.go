@@ -444,3 +444,148 @@ func TestSceneSportsFilters(t *testing.T) {
 		assert.NotContains(t, query(t, &models.SceneFilterType{ImportDismissed: &no}), unlinked.ID)
 	})
 }
+
+func TestEventCoverage(t *testing.T) {
+	runWithRollbackTxn(t, "counts", func(t *testing.T, ctx context.Context) {
+		f1 := createSeries(t, ctx, "Formula 1")
+		other := createSeries(t, ctx, "MotoGP")
+		brazil := createEvent(t, ctx, f1.ID, 2024, intPtr(21), "São Paulo Grand Prix")
+		vegas := createEvent(t, ctx, f1.ID, 2024, intPtr(22), "Las Vegas Grand Prix")
+		suzuka := createEvent(t, ctx, f1.ID, 1998, intPtr(16), "Japanese Grand Prix")
+		valencia := createEvent(t, ctx, other.ID, 2024, intPtr(20), "Valencia Grand Prix")
+
+		race := createSession(t, ctx, brazil.ID, models.SessionTypeRace, nil)
+		quali := createSession(t, ctx, brazil.ID, models.SessionTypeQualifying, nil)
+		createSession(t, ctx, brazil.ID, models.SessionTypePractice1, nil)
+		vegasRace := createSession(t, ctx, vegas.ID, models.SessionTypeRace, nil)
+		suzukaRace := createSession(t, ctx, suzuka.ID, models.SessionTypeRace, nil)
+		createSession(t, ctx, valencia.ID, models.SessionTypeRace, nil)
+
+		partial := models.CompletenessPartial
+		rec := func(e *models.Event, s *models.EventSession, part bool) {
+			createRecording(t, ctx, "rec", func(sc *models.Scene) {
+				sc.EventID = &e.ID
+				if s != nil {
+					sc.SessionID = &s.ID
+				}
+				if part {
+					sc.Completeness = &partial
+				}
+			})
+		}
+		rec(brazil, race, false)
+		rec(brazil, race, false)
+		rec(brazil, race, true)
+		rec(brazil, quali, true)
+		rec(brazil, nil, false) // build-up show
+		rec(suzuka, suzukaRace, false)
+		rec(valencia, nil, false)
+		createRecording(t, ctx, "unlinked", nil)
+
+		counts, err := db.Event.RecordingCounts(ctx, f1.ID, 2024)
+		require.NoError(t, err)
+		got := map[string]models.RecordingCount{}
+		for _, c := range counts {
+			key := "extras"
+			if c.SessionID != nil {
+				key = strconv.Itoa(*c.SessionID)
+			}
+			got[strconv.Itoa(c.EventID)+"/"+key] = c
+		}
+		require.Len(t, got, 3)
+		assert.Equal(t, 3, got[strconv.Itoa(brazil.ID)+"/"+strconv.Itoa(race.ID)].Recordings)
+		assert.Equal(t, 1, got[strconv.Itoa(brazil.ID)+"/"+strconv.Itoa(race.ID)].Partial)
+		assert.Equal(t, 1, got[strconv.Itoa(brazil.ID)+"/"+strconv.Itoa(quali.ID)].Partial)
+		assert.Equal(t, 1, got[strconv.Itoa(brazil.ID)+"/extras"].Recordings)
+		assert.NotContains(t, got, strconv.Itoa(vegas.ID)+"/"+strconv.Itoa(vegasRace.ID), "sessions without recordings are absent")
+
+		stats, err := db.Event.SeasonStats(ctx, f1.ID)
+		require.NoError(t, err)
+		require.Len(t, stats, 2)
+		assert.Equal(t, models.SeasonStats{Season: 2024, Events: 2, Sessions: 4, CoveredSessions: 2, Recordings: 5}, stats[0])
+		assert.Equal(t, models.SeasonStats{Season: 1998, Events: 1, Sessions: 1, CoveredSessions: 1, Recordings: 1}, stats[1])
+
+		for _, l := range []string{"nl", "de", "nl", ""} {
+			lang := l
+			createRecording(t, ctx, "lang", func(sc *models.Scene) { sc.Language = lang })
+		}
+		langs, err := db.Event.RecordingLanguages(ctx)
+		require.NoError(t, err)
+		assert.Equal(t, []string{"de", "nl"}, langs, "distinct, sorted, empty skipped")
+
+		none, err := db.Event.SeasonStats(ctx, f1.ID+other.ID+100)
+		require.NoError(t, err)
+		assert.Empty(t, none)
+	})
+}
+
+func TestSceneSportsSearch(t *testing.T) {
+	runWithRollbackTxn(t, "search", func(t *testing.T, ctx context.Context) {
+		f1 := createSeries(t, ctx, "Formula 1")
+		e := models.NewEvent()
+		e.SeriesID, e.Season, e.Round, e.Name = f1.ID, 2024, intPtr(21), "São Paulo Grand Prix"
+		e.Country, e.Circuit = "Brazil", "Interlagos"
+		require.NoError(t, db.Event.Create(ctx, &e))
+		race := createSession(t, ctx, e.ID, models.SessionTypeRace, nil)
+		onboard := models.FeedTypeOnboard
+
+		hit := createRecording(t, ctx, "zz-search-a", func(s *models.Scene) {
+			s.EventID, s.SessionID = &e.ID, &race.ID
+			s.FeedType, s.FeedSubject = &onboard, "Lando Norris"
+		})
+		createRecording(t, ctx, "zz-search-b", func(s *models.Scene) {
+			s.EventID = &e.ID
+		})
+
+		search := func(q string) []int {
+			var ret []int
+			for _, s := range queryScene(ctx, t, db.Scene, nil, &models.FindFilterType{Q: &q}) {
+				ret = append(ret, s.ID)
+			}
+			return ret
+		}
+
+		assert.Equal(t, []int{hit.ID}, search("2024 Brazil race onboard Norris"))
+		assert.Len(t, search("interlagos zz-search"), 2)
+		assert.Empty(t, search("2023 Brazil"))
+	})
+}
+
+func TestSceneSortByEvent(t *testing.T) {
+	runWithRollbackTxn(t, "sort", func(t *testing.T, ctx context.Context) {
+		f1 := createSeries(t, ctx, "Formula 1")
+		r21 := createEvent(t, ctx, f1.ID, 2024, intPtr(21), "São Paulo Grand Prix")
+		r1 := createEvent(t, ctx, f1.ID, 2024, intPtr(1), "Bahrain Grand Prix")
+		old := createEvent(t, ctx, f1.ID, 1998, intPtr(16), "Japanese Grand Prix")
+		race := createSession(t, ctx, r21.ID, models.SessionTypeRace, nil)
+		fp1 := createSession(t, ctx, r21.ID, models.SessionTypePractice1, nil)
+
+		link := func(title string, e *models.Event, s *models.EventSession) int {
+			return createRecording(t, ctx, title, func(sc *models.Scene) {
+				if e != nil {
+					sc.EventID = &e.ID
+				}
+				if s != nil {
+					sc.SessionID = &s.ID
+				}
+			}).ID
+		}
+		a := link("zz-sort race", r21, race)
+		b := link("zz-sort fp1", r21, fp1)
+		c := link("zz-sort bahrain", r1, nil)
+		d := link("zz-sort 1998", old, nil)
+		e := link("zz-sort none", nil, nil)
+
+		q := "zz-sort"
+		sort := "event"
+		got := func(dir models.SortDirectionEnum) []int {
+			var ret []int
+			for _, s := range queryScene(ctx, t, db.Scene, nil, &models.FindFilterType{Q: &q, Sort: &sort, Direction: &dir}) {
+				ret = append(ret, s.ID)
+			}
+			return ret
+		}
+		assert.Equal(t, []int{d, c, b, a, e}, got(models.SortDirectionEnumAsc))
+		assert.Equal(t, []int{a, b, c, d, e}, got(models.SortDirectionEnumDesc), "unlinked recordings stay last")
+	})
+}

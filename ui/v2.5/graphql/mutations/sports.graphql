@@ -1,0 +1,71 @@
+mutation SeriesCreate($input: SeriesCreateInput!) {
+  seriesCreate(input: $input) {
+    ...SeriesData
+  }
+}
+
+mutation SeriesUpdate($input: SeriesUpdateInput!) {
+  seriesUpdate(input: $input) {
+    ...SeriesData
+  }
+}
+
+mutation SeriesDestroy($id: ID!) {
+  seriesDestroy(id: $id)
+}
+
+mutation EventCreate($input: EventCreateInput!) {
+  eventCreate(input: $input) {
+    ...EventData
+  }
+}
+
+mutation EventUpdate($input: EventUpdateInput!) {
+  eventUpdate(input: $input) {
+    ...EventData
+  }
+}
+
+mutation EventDestroy($id: ID!) {
+  eventDestroy(id: $id)
+}
+
+mutation EventSessionCreate($input: EventSessionCreateInput!) {
+  eventSessionCreate(input: $input) {
+    ...EventSessionData
+  }
+}
+
+mutation EventSessionUpdate($input: EventSessionUpdateInput!) {
+  eventSessionUpdate(input: $input) {
+    ...EventSessionData
+  }
+}
+
+mutation EventSessionDestroy($id: ID!) {
+  eventSessionDestroy(id: $id)
+}
+
+mutation SyncSeriesCalendar($input: SyncSeriesCalendarInput!) {
+  syncSeriesCalendar(input: $input)
+}
+
+mutation RecordingUpdate($input: SceneUpdateInput!) {
+  sceneUpdate(input: $input) {
+    ...RecordingData
+  }
+}
+
+mutation SportsImportAccept($input: ImportAcceptInput!) {
+  sportsImportAccept(input: $input) {
+    id
+  }
+}
+
+mutation SportsImportAcceptAll($input: ImportAcceptAllInput) {
+  sportsImportAcceptAll(input: $input)
+}
+
+mutation SportsImportDismiss($input: ImportDismissInput!) {
+  sportsImportDismiss(input: $input)
+}

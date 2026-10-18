@@ -24,8 +24,12 @@ import { ManualStateContext } from "./Help/context";
 import { SettingsButton } from "./SettingsButton";
 import {
   faBars,
+  faCalendarDays,
   faChartColumn,
+  faFileImport,
   faFilm,
+  faHouse,
+  faListUl,
   faHeart,
   faImage,
   faImages,
@@ -40,6 +44,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { baseURL } from "src/core/createClient";
 import { PatchComponent } from "src/patch";
+import * as GQL from "src/core/generated-graphql";
+import { TITLE } from "src/hooks/title";
 
 interface IMenuItem {
   name: string;
@@ -48,11 +54,29 @@ interface IMenuItem {
   icon: IconDefinition;
   hotkey: string;
   userCreatable?: boolean;
+  // paths that also mark the item as active
+  activePaths?: string[];
 }
 const messages = defineMessages({
+  home: {
+    id: "sports.nav.home",
+    defaultMessage: "Home",
+  },
+  seasons: {
+    id: "sports.nav.seasons",
+    defaultMessage: "Seasons",
+  },
+  recordings: {
+    id: "sports.nav.recordings",
+    defaultMessage: "Recordings",
+  },
+  import: {
+    id: "sports.nav.import",
+    defaultMessage: "Import",
+  },
   scenes: {
-    id: "scenes",
-    defaultMessage: "Scenes",
+    id: "sports.nav.all_videos",
+    defaultMessage: "All videos",
   },
   images: {
     id: "images",
@@ -96,7 +120,65 @@ const messages = defineMessages({
   },
 });
 
+// the sports screens are always shown
+const sportsMenuItems: IMenuItem[] = [
+  {
+    name: "home",
+    message: messages.home,
+    href: "/",
+    icon: faHouse,
+    hotkey: "g h",
+  },
+  {
+    name: "seasons",
+    message: messages.seasons,
+    href: "/seasons",
+    icon: faCalendarDays,
+    hotkey: "g e",
+    activePaths: ["/series", "/events"],
+  },
+  {
+    name: "recordings",
+    message: messages.recordings,
+    href: "/recordings",
+    icon: faListUl,
+    hotkey: "g r",
+  },
+  {
+    name: "import",
+    message: messages.import,
+    href: "/import",
+    icon: faFileImport,
+    hotkey: "g m",
+  },
+];
+
+// the library pages, shown as configured in the interface settings
 const allMenuItems: IMenuItem[] = [
+  {
+    name: "studios",
+    message: messages.studios,
+    href: "/studios",
+    icon: faVideo,
+    hotkey: "g u",
+    userCreatable: true,
+  },
+  {
+    name: "performers",
+    message: messages.performers,
+    href: "/performers",
+    icon: faUser,
+    hotkey: "g p",
+    userCreatable: true,
+  },
+  {
+    name: "tags",
+    message: messages.tags,
+    href: "/tags",
+    icon: faTag,
+    hotkey: "g t",
+    userCreatable: true,
+  },
   {
     name: "scenes",
     message: messages.scenes,
@@ -135,30 +217,6 @@ const allMenuItems: IMenuItem[] = [
     hotkey: "g l",
     userCreatable: true,
   },
-  {
-    name: "performers",
-    message: messages.performers,
-    href: "/performers",
-    icon: faUser,
-    hotkey: "g p",
-    userCreatable: true,
-  },
-  {
-    name: "studios",
-    message: messages.studios,
-    href: "/studios",
-    icon: faVideo,
-    hotkey: "g u",
-    userCreatable: true,
-  },
-  {
-    name: "tags",
-    message: messages.tags,
-    href: "/tags",
-    icon: faTag,
-    hotkey: "g t",
-    userCreatable: true,
-  },
 ];
 
 const newPathsList = allMenuItems
@@ -191,7 +249,7 @@ export const MainNavbar: React.FC = () => {
   const menuItems = useMemo(() => {
     let cfgMenuItems = configuration?.interface.menuItems;
     if (!cfgMenuItems) {
-      return allMenuItems;
+      return [...sportsMenuItems, ...allMenuItems];
     }
 
     // translate old movies menu item to groups
@@ -202,10 +260,18 @@ export const MainNavbar: React.FC = () => {
       return item;
     });
 
-    return allMenuItems.filter((menuItem) =>
-      cfgMenuItems!.includes(menuItem.name)
-    );
+    return [
+      ...sportsMenuItems,
+      ...allMenuItems.filter((menuItem) =>
+        cfgMenuItems!.includes(menuItem.name)
+      ),
+    ];
   }, [configuration]);
+
+  const { data: importData } = GQL.useSportsImportCountQuery({
+    fetchPolicy: "cache-and-network",
+  });
+  const importCount = importData?.sportsImportSuggestions.count ?? 0;
 
   // react-bootstrap typing bug
   const navbarRef = useRef<HTMLElement | null>(null);
@@ -359,20 +425,39 @@ export const MainNavbar: React.FC = () => {
     >
       <Navbar.Collapse className="bg-dark order-sm-1">
         <MainNavbarMenuItems>
-          {menuItems.map(({ href, icon, message }) => (
+          {menuItems.map(({ name, href, icon, message, activePaths }) => (
             <Nav.Link
               eventKey={href}
               as="div"
               key={href}
               className="col-4 col-sm-3 col-md-2 col-lg-auto"
             >
-              <LinkContainer activeClassName="active" exact to={href}>
+              <LinkContainer
+                activeClassName="active"
+                exact
+                to={href}
+                isActive={(match, loc) =>
+                  !!match ||
+                  !!activePaths?.some((p) => loc.pathname.startsWith(p))
+                }
+              >
                 <Button className="minimal p-4 p-xl-2 d-flex d-xl-inline-block flex-column justify-content-between align-items-center">
                   <Icon
                     {...{ icon }}
                     className="nav-menu-icon d-block d-xl-inline mb-2 mb-xl-0"
                   />
                   <span>{intl.formatMessage(message)}</span>
+                  {name === "import" && importCount > 0 && (
+                    <span
+                      className="pw-nav-badge"
+                      aria-label={intl.formatMessage(
+                        { id: "sports.to_review_count" },
+                        { count: importCount }
+                      )}
+                    >
+                      {importCount > 999 ? "999+" : importCount}
+                    </span>
+                  )}
                 </Button>
               </LinkContainer>
             </Nav.Link>
@@ -387,7 +472,10 @@ export const MainNavbar: React.FC = () => {
 
       <Navbar.Brand as="div" onClick={handleDismiss}>
         <Link to="/">
-          <Button className="minimal brand-link d-inline-block">Stash</Button>
+          <Button className="minimal brand-link d-inline-flex align-items-center">
+            <span className="pw-brand-mark" aria-hidden="true" />
+            {configuration?.ui.title || TITLE}
+          </Button>
         </Link>
       </Navbar.Brand>
 

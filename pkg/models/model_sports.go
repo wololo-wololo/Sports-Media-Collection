@@ -345,3 +345,23 @@ type CompletenessCriterionInput struct {
 	Value    []Completeness    `json:"value"`
 	Modifier CriterionModifier `json:"modifier"`
 }
+
+// RecordingCount is the number of recordings of one event session, or of an
+// event without a session when SessionID is nil.
+type RecordingCount struct {
+	EventID    int
+	SessionID  *int
+	Recordings int
+	// Partial counts the recordings marked as incomplete.
+	Partial int
+}
+
+// SeasonStats summarises the calendar and recordings of one season.
+type SeasonStats struct {
+	Season   int
+	Events   int
+	Sessions int
+	// CoveredSessions have at least one recording.
+	CoveredSessions int
+	Recordings      int
+}

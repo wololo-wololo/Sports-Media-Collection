@@ -1115,10 +1115,29 @@ func (qb *SceneStore) makeQuery(ctx context.Context, sceneFilter *models.SceneFi
 				table:    sceneMarkerTable,
 				onClause: "scene_markers.scene_id = scenes.id",
 			},
+			// sports recordings are also found by their event, session,
+			// broadcaster, feed and commentators
+			join{
+				table:    eventsTable,
+				onClause: "events.id = scenes.event_id",
+			},
+			join{
+				table:    eventSessionsTable,
+				onClause: "event_sessions.id = scenes.session_id",
+			},
+			join{
+				table:    studioTable,
+				onClause: "studios.id = scenes.studio_id",
+			},
 		)
 
 		filepathColumn := "folders.path || '" + string(filepath.Separator) + "' || files.basename"
-		searchColumns := []string{"scenes.title", "scenes.details", filepathColumn, "files_fingerprints.fingerprint", "scene_markers.title"}
+		searchColumns := []string{
+			"scenes.title", "scenes.details", filepathColumn, "files_fingerprints.fingerprint", "scene_markers.title",
+			"events.name", "events.location", "events.country", "events.circuit", "CAST(events.season AS TEXT)",
+			"event_sessions.session_type", "event_sessions.name", "studios.name",
+			"scenes.feed_type", "scenes.feed_subject", "scenes.commentators", "scenes.language",
+		}
 		query.parseQueryString(searchColumns, *q)
 	}
 
@@ -1238,6 +1257,7 @@ var sceneSortOptions = sortOptions{
 	"created_at",
 	"code",
 	"date",
+	"event",
 	"production_date",
 	"file_count",
 	"filesize",
@@ -1318,6 +1338,15 @@ func (qb *SceneStore) setSceneSort(query *queryBuilder, findFilter *models.FindF
 
 	direction := findFilter.GetDirection()
 	switch sort {
+	case "event":
+		// season, round and session order; recordings without an event last
+		dir := getSortDirection(direction)
+		query.sortAndPagination += fmt.Sprintf(
+			" ORDER BY scenes.event_id IS NULL ASC,"+
+				" (SELECT season FROM events WHERE events.id = scenes.event_id) %[1]s,"+
+				" (SELECT COALESCE(round, 999) FROM events WHERE events.id = scenes.event_id) %[1]s,"+
+				" (SELECT %[2]s FROM event_sessions WHERE event_sessions.id = scenes.session_id) %[1]s",
+			dir, sessionTypeOrder)
 	case "movie_scene_number":
 		query.joinSort(groupsScenesTable, "", "scenes.id = groups_scenes.scene_id")
 		query.sortAndPagination += getSort("scene_index", direction, groupsScenesTable)

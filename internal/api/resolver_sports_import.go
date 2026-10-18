@@ -119,9 +119,18 @@ func (ic *importContext) toGQL(scene *models.Scene, path string, s importer.Sugg
 	return ret
 }
 
+// dismissedFilter selects which review items to list.
+type dismissedFilter int
+
+const (
+	openOnly dismissedFilter = iota
+	openAndDismissed
+	dismissedOnly
+)
+
 // reviewScenes returns the recordings to review: the given ids, or the
 // recordings without an event, ordered by path.
-func (r *Resolver) reviewScenes(ctx context.Context, ids []string, includeDismissed bool, page, perPage int) ([]*models.Scene, int, error) {
+func (r *Resolver) reviewScenes(ctx context.Context, ids []string, dismissed dismissedFilter, page, perPage int) ([]*models.Scene, int, error) {
 	if len(ids) > 0 {
 		sceneIDs, err := handleIDList(ids, "scene_ids")
 		if err != nil {
@@ -137,9 +146,13 @@ func (r *Resolver) reviewScenes(ctx context.Context, ids []string, includeDismis
 	filter := &models.SceneFilterType{
 		Events: &models.MultiCriterionInput{Modifier: models.CriterionModifierIsNull},
 	}
-	if !includeDismissed {
+	switch dismissed {
+	case openOnly:
 		f := false
 		filter.ImportDismissed = &f
+	case dismissedOnly:
+		t := true
+		filter.ImportDismissed = &t
 	}
 
 	sort := "path"
@@ -171,7 +184,13 @@ func (r *queryResolver) SportsImportSuggestions(ctx context.Context, input *Impo
 	if input.PerPage != nil && *input.PerPage > 0 {
 		perPage = min(*input.PerPage, maxImportPerPage)
 	}
-	includeDismissed := input.IncludeDismissed != nil && *input.IncludeDismissed
+	dismissed := openOnly
+	if input.IncludeDismissed != nil && *input.IncludeDismissed {
+		dismissed = openAndDismissed
+	}
+	if input.DismissedOnly != nil && *input.DismissedOnly {
+		dismissed = dismissedOnly
+	}
 
 	ret := &FindImportSuggestionsResultType{Suggestions: []*ImportSuggestion{}}
 	if err := r.withReadTxn(ctx, func(ctx context.Context) error {
@@ -180,7 +199,7 @@ func (r *queryResolver) SportsImportSuggestions(ctx context.Context, input *Impo
 			return err
 		}
 
-		scenes, count, err := r.reviewScenes(ctx, input.SceneIds, includeDismissed, page, perPage)
+		scenes, count, err := r.reviewScenes(ctx, input.SceneIds, dismissed, page, perPage)
 		if err != nil {
 			return err
 		}
@@ -340,7 +359,7 @@ func (r *mutationResolver) SportsImportAcceptAll(ctx context.Context, input *Imp
 			return err
 		}
 
-		scenes, _, err := r.reviewScenes(ctx, ids, false, 1, models.PerPageAll)
+		scenes, _, err := r.reviewScenes(ctx, ids, openOnly, 1, models.PerPageAll)
 		if err != nil {
 			return err
 		}

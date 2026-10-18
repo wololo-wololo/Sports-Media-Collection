@@ -1,0 +1,146 @@
+query AllSeries {
+  allSeries {
+    ...SeriesData
+  }
+}
+
+query FindSeries($id: ID!) {
+  findSeries(id: $id) {
+    ...SeriesData
+  }
+}
+
+query FindEvents($series_id: ID, $season: Int) {
+  findEvents(series_id: $series_id, season: $season) {
+    ...EventData
+  }
+}
+
+query FindEvent($id: ID!) {
+  findEvent(id: $id) {
+    ...EventData
+    scene_count
+    sessions {
+      ...EventSessionData
+    }
+    scenes {
+      ...RecordingData
+    }
+  }
+}
+
+query SeasonCoverage($series_id: ID!, $season: Int!) {
+  seasonCoverage(series_id: $series_id, season: $season) {
+    event {
+      ...EventData
+    }
+    sessions {
+      session {
+        ...EventSessionData
+      }
+      recordings
+      partial
+    }
+    extras
+    recordings
+  }
+}
+
+query SeriesCoverage($series_id: ID!) {
+  seriesCoverage(series_id: $series_id) {
+    season
+    events
+    sessions
+    covered_sessions
+    recordings
+  }
+}
+
+query FindRecordings($filter: FindFilterType, $scene_filter: SceneFilterType) {
+  findScenes(filter: $filter, scene_filter: $scene_filter) {
+    count
+    duration
+    scenes {
+      ...RecordingData
+    }
+  }
+}
+
+query SportsImportSuggestions($input: ImportSuggestionsInput) {
+  sportsImportSuggestions(input: $input) {
+    count
+    suggestions {
+      path
+      confidence
+      scene {
+        id
+        title
+        paths {
+          screenshot
+        }
+        files {
+          id
+          duration
+          size
+          width
+          height
+        }
+      }
+      series {
+        id
+        name
+      }
+      event {
+        ...EventData
+      }
+      session {
+        ...EventSessionData
+      }
+      alternatives {
+        ...EventData
+      }
+      studio {
+        id
+        name
+      }
+      broadcaster_name
+      language
+      feed_type
+      feed_subject
+      source
+      part
+      fields {
+        name
+        value
+        guessed
+        origin
+      }
+      notes
+    }
+  }
+}
+
+query RecordingLanguages {
+  recordingLanguages
+}
+
+query SportsImportCount {
+  sportsImportSuggestions(input: { per_page: 1 }) {
+    count
+  }
+}
+
+query FindRecording($id: ID!) {
+  findScene(id: $id) {
+    ...RecordingData
+  }
+}
+
+query FindEventSessions($id: ID!) {
+  findEvent(id: $id) {
+    id
+    sessions {
+      ...EventSessionData
+    }
+  }
+}

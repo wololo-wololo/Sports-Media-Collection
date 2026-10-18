@@ -58,6 +58,8 @@ type Series {
   "Seasons that have events, newest first"
   seasons: [Int!]!
   event_count: Int!
+  "Recordings linked to an event of this series"
+  scene_count: Int!
   created_at: Time!
   updated_at: Time!
 }
@@ -243,6 +245,8 @@ input ImportSuggestionsInput {
   scene_ids: [ID!]
   "Include recordings dismissed from the review"
   include_dismissed: Boolean
+  "List only recordings dismissed from the review"
+  dismissed_only: Boolean
   "1-based page, default 1"
   page: Int
   "Default 25, at most 200"
@@ -266,4 +270,32 @@ input ImportDismissInput {
   scene_ids: [ID!]!
   "false brings recordings back into the review"
   dismissed: Boolean!
+}
+
+"Recordings of one session"
+type SessionCoverage {
+  session: EventSession!
+  recordings: Int!
+  "Recordings marked as incomplete"
+  partial: Int!
+}
+
+"Recordings of one event, by session"
+type EventCoverage {
+  event: Event!
+  "Every session of the event, in weekend order"
+  sessions: [SessionCoverage!]!
+  "Recordings of the event that cover no single session"
+  extras: Int!
+  recordings: Int!
+}
+
+"Calendar and recording totals of one season"
+type SeasonCoverage {
+  season: Int!
+  events: Int!
+  sessions: Int!
+  "Sessions with at least one recording"
+  covered_sessions: Int!
+  recordings: Int!
 }

@@ -570,6 +570,104 @@ func (r *seriesResolver) Seasons(ctx context.Context, obj *models.Series) (ret [
 	return ret, nil
 }
 
+func (r *seriesResolver) SceneCount(ctx context.Context, obj *models.Series) (ret int, err error) {
+	if err := r.withReadTxn(ctx, func(ctx context.Context) error {
+		ret, err = r.repository.Scene.QueryCount(ctx, &models.SceneFilterType{Series: idFilter(obj.ID)}, nil)
+		return err
+	}); err != nil {
+		return 0, err
+	}
+	return ret, nil
+}
+
+func (r *queryResolver) SeasonCoverage(ctx context.Context, seriesID string, season int) ([]*EventCoverage, error) {
+	sid, err := parseID(seriesID, "series")
+	if err != nil {
+		return nil, err
+	}
+
+	ret := []*EventCoverage{}
+	if err := r.withReadTxn(ctx, func(ctx context.Context) error {
+		events, err := r.repository.Event.Query(ctx, models.EventQueryOptions{SeriesID: &sid, Season: &season})
+		if err != nil {
+			return err
+		}
+		counts, err := r.repository.Event.RecordingCounts(ctx, sid, season)
+		if err != nil {
+			return err
+		}
+
+		bySession := make(map[int]models.RecordingCount)
+		extras := make(map[int]int)
+		totals := make(map[int]int)
+		for _, c := range counts {
+			totals[c.EventID] += c.Recordings
+			if c.SessionID == nil {
+				extras[c.EventID] += c.Recordings
+			} else {
+				bySession[*c.SessionID] = c
+			}
+		}
+
+		for _, e := range events {
+			sessions, err := r.repository.EventSession.FindByEventID(ctx, e.ID)
+			if err != nil {
+				return err
+			}
+			ec := &EventCoverage{Event: e, Sessions: []*SessionCoverage{}, Extras: extras[e.ID], Recordings: totals[e.ID]}
+			for _, s := range sessions {
+				c := bySession[s.ID]
+				ec.Sessions = append(ec.Sessions, &SessionCoverage{Session: s, Recordings: c.Recordings, Partial: c.Partial})
+			}
+			ret = append(ret, ec)
+		}
+		return nil
+	}); err != nil {
+		return nil, err
+	}
+
+	return ret, nil
+}
+
+func (r *queryResolver) RecordingLanguages(ctx context.Context) (ret []string, err error) {
+	if err := r.withReadTxn(ctx, func(ctx context.Context) error {
+		ret, err = r.repository.Event.RecordingLanguages(ctx)
+		return err
+	}); err != nil {
+		return nil, err
+	}
+	return ret, nil
+}
+
+func (r *queryResolver) SeriesCoverage(ctx context.Context, seriesID string) ([]*SeasonCoverage, error) {
+	sid, err := parseID(seriesID, "series")
+	if err != nil {
+		return nil, err
+	}
+
+	ret := []*SeasonCoverage{}
+	if err := r.withReadTxn(ctx, func(ctx context.Context) error {
+		stats, err := r.repository.Event.SeasonStats(ctx, sid)
+		if err != nil {
+			return err
+		}
+		for _, s := range stats {
+			ret = append(ret, &SeasonCoverage{
+				Season:          s.Season,
+				Events:          s.Events,
+				Sessions:        s.Sessions,
+				CoveredSessions: s.CoveredSessions,
+				Recordings:      s.Recordings,
+			})
+		}
+		return nil
+	}); err != nil {
+		return nil, err
+	}
+
+	return ret, nil
+}
+
 func (r *seriesResolver) EventCount(ctx context.Context, obj *models.Series) (ret int, err error) {
 	if err := r.withReadTxn(ctx, func(ctx context.Context) error {
 		ret, err = r.repository.Event.CountBySeriesID(ctx, obj.ID)

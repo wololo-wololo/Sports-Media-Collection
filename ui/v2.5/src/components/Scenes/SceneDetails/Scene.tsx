@@ -79,6 +79,9 @@ const SceneMarkersPanel = lazyComponent(() => import("./SceneMarkersPanel"));
 const SceneFileInfoPanel = lazyComponent(() => import("./SceneFileInfoPanel"));
 const SceneDetailPanel = lazyComponent(() => import("./SceneDetailPanel"));
 const SceneHistoryPanel = lazyComponent(() => import("./SceneHistoryPanel"));
+const RecordingPanel = lazyComponent(
+  () => import("src/components/Sports/RecordingPanel")
+);
 const SceneGroupPanel = lazyComponent(() => import("./SceneGroupPanel"));
 const SceneGalleriesPanel = lazyComponent(
   () => import("./SceneGalleriesPanel")
@@ -215,7 +218,12 @@ const ScenePage: React.FC<IProps> = PatchComponent("ScenePage", (props) => {
 
   const [organizedLoading, setOrganizedLoading] = useState(false);
 
-  const [activeTabKey, setActiveTabKey] = useState("scene-details-panel");
+  // the import review links straight to the recording fields
+  const [activeTabKey, setActiveTabKey] = useState(() =>
+    new URLSearchParams(window.location.search).get("tab") === "recording"
+      ? "scene-recording-panel"
+      : "scene-details-panel"
+  );
 
   const [isMerging, setIsMerging] = useState(false);
   const [isDeleteAlertOpen, setIsDeleteAlertOpen] = useState<boolean>(false);
@@ -546,6 +554,11 @@ const ScenePage: React.FC<IProps> = PatchComponent("ScenePage", (props) => {
                 <FormattedMessage id="details" />
               </Nav.Link>
             </Nav.Item>
+            <Nav.Item>
+              <Nav.Link eventKey="scene-recording-panel">
+                <FormattedMessage id="sports.recording" />
+              </Nav.Link>
+            </Nav.Item>
             {queueScenes.length > 0 ? (
               <Nav.Item>
                 <Nav.Link eventKey="scene-queue-panel">
@@ -611,6 +624,12 @@ const ScenePage: React.FC<IProps> = PatchComponent("ScenePage", (props) => {
         <ScenePageTabContent {...props}>
           <Tab.Pane eventKey="scene-details-panel">
             <SceneDetailPanel scene={scene} />
+          </Tab.Pane>
+          <Tab.Pane eventKey="scene-recording-panel" mountOnEnter>
+            <RecordingPanel
+              sceneID={scene.id}
+              getPlayerPosition={() => getPlayerPosition()}
+            />
           </Tab.Pane>
           <Tab.Pane eventKey="scene-queue-panel">
             <QueueViewer
